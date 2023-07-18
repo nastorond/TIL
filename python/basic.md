@@ -1,10 +1,3 @@
-```python
-import math
-a, b = 3.2-3.1, 1.2-1.1
-print(math.isclose(a,b)) ## True
-```
-
-
 ## f-string
 ```python
 bugs = roaches
@@ -15,7 +8,7 @@ print(f'Debugging {bugs} {counts} {area}')
 print('Debugging {} {} {}'.format(bugs,counts,area))
 print('Debugging %s %d %s' %(bugs, counts, area))
 
-## f-string 응용
+## 응용
 greeting = 'hi'
 print(f'{greeting:^10}')
 print(f'{greeting:>10}')
