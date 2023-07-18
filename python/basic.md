@@ -35,3 +35,10 @@ print(my_set_1) # set()
 print(my_set_2) # {1, 2, 3}
 print(my_set_3) # {1}
 ```
+
+## stack && queue
+- pop
+```python
+li.pop() # 마지막 거
+li.pop(idx) # li[idx] pop
+```
