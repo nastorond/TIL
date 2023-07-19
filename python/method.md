@@ -22,6 +22,7 @@ print(math.isclose(a,b)) ## True
 - 순회 가능한 데이터구조(iterable)의 모든 요소에 함수를 적용하고, 그 결과를 map object로 반환
 - iterable 반복 가능 객체(string, tuple, list 등)
 - 함수가 인자로 들어갈 수 있다는 것이 강력한 점
+- map 자체로써는 객체로 저장되어 실행되지 않고 list 등으로 동작을 유도해야 함
     ```python
     nums = [1,2,3]
     res = map(str, nums)
