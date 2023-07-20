@@ -26,23 +26,6 @@ print(my_str[::-1]) ## olleh
 my_str[1]='z'
 ```
 
-## set
-```python
-my_set_1 = set()
-my_set_2 = {1, 2, 3}
-my_set_3 = {1, 1, 1}
-print(my_set_1) # set()
-print(my_set_2) # {1, 2, 3}
-print(my_set_3) # {1}
-```
-
-## stack && queue
-- pop
-```python
-li.pop() # 마지막 거
-li.pop(idx) # li[idx] pop
-```
-
 ## function
 - parameter : 매개변수, 함수를 정의할 때 사용
 - arguments : 인자, 함수를 사용할 때 사용
@@ -53,20 +36,13 @@ li.pop(idx) # li[idx] pop
     return
     ```
 
-### 재귀 함수
-- 함수 내부에서 자기 자신을 호출하는 함수
-- 특정 알고리즘 식을 표현할 때 변수의 사용이 줄어들며, 코드의 가독성 증가
-- 1개 이상의 base case 존재
-- 재귀호출의 결과를 이용하여 문제를 작은단위의 문제까지 분할하고, 분할된 문제들의 결과를 조합하여 최종 결과를 도출
-- 대표적인 예시 팩토리얼
-    ```python
-    def fac(n):
-        if n == 0:
-            return 1
-        return n * fac(n - 1)
-    res = fac(5)
-    print(res) # 120
-    ``` 
+## for - loop
+```python
+for i in range(13):
+    pass
+else: # for문이 끝날 떄 까지 break가 없었다면 실행
+    print('s')
+```
 
 
 ## 변수
@@ -141,6 +117,18 @@ li.pop(idx) # li[idx] pop
 - 모듈화 하는것은 구조화 하는 작업
 - PSL 내부 패키지 : 설치없이 바로 import 하여 사용
 - 외부 패키지 : pip를 사용하여 설치 후 import 하여 사용
+
+## List Comprehension
+ - 홀수만 들어있는 리스트 만들기 (1~10)
+ - [expression for 변수 in iterable]
+ - list(expression for 변수 in iterable)
+ ```python
+ li_1 = [i**2 for i in range(1,10)] # [1, 4, 9, 16, 25, 36, 49, 64, 81]
+ li_2 = [i for i in range(1,11) if i%2!=0] # [1, 3, 5, 7, 9]
+ li_3 = [i if i% 2 == 1 else str(i) for i in range(10)] # ['0', 1, '2', 3, '4', 5, '6', 7, '8', 9]
+ # elif 안댐 if 중첩은 가능
+```
+
 
 
 ## 단축키
