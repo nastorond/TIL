@@ -100,22 +100,23 @@ li.pop(idx) # li[idx] pop
     ```
 
 ### enumerate
-인덱스와 iterable의 요소들이 튜플형태로 return
+- 인덱스와 iterable의 요소들이 튜플형태로 return</br>
+
     ```python
     res = ['a', 'b', 'c']
     print(enumerate(res)) # <enumerate object at 0x000001AE1B4D06C0>
     print(list(enumerate(res))) # [(0, 'a'), (1, 'b'), (2, 'c')]
-
     fruits = ['apple', 'banana', 'cherry']
     for idx, fruit in enumerate(fruits):
         print(f'인덱스 {idx}: {fruit}')
     ```
 
 ### dictionary
+- **을 사용하면 keyword 형태로 작동</br>
+
     ```python
     my_dict = {'x': 1, 'y': 2}
     print(*my_dict) # x y
     list(**my_dict) # TypeError: list() takes no keyword arguments
     print(**my_dict) # TypeError: 'x' is an invalid keyword argument for print()
     ```
-- **을 사용하면 keyword 형태로 작동</br>
