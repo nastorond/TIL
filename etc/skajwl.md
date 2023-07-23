@@ -32,3 +32,25 @@ python version 3. 후반대 부터 for loop 성능에 비약적인 향상이 있
 **작은 효율성에대해서는, 말하자면 97% 정도에 대해서는, 잊어버려라</br>
 섣부른 최적화는 모든 악의 근원이다** -도널드 knuth art of programming의 저자</br>
 **We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.**   Donald Ervin Knuth
+
+
+### Short Circuit Evaluation 단축평가
+```python
+vowels = 'aeiou'
+print(('b' and 'a' ) in vowels) # True
+
+print(('a' and 'b' ) in vowels) # False
+# 'a'는 noneempty string 이니까 True 'b'역시 True 후 결과로서 'b' return 
+# 그래서 최종 결과는 False
+
+print(('b' or 'i' ) in vowels) # False
+
+print(('i' or 'b') in vowels) # True
+# 'i'는 nonempty string 이라서 True 따라서 뒤에 값의 관계없이 결정 났으므로 결과로서 'b' return
+# 그래서 최종 결과는 True
+
+spl = 'b' or 'i' # b
+spl2 = 'i' or 'b' # i
+spl3 = 'i' and 'b' # b
+spl4 = 'b' and 'i' # i
+```
