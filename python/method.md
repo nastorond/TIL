@@ -120,3 +120,7 @@ li.pop(idx) # li[idx] pop
     list(**my_dict) # TypeError: list() takes no keyword arguments
     print(**my_dict) # TypeError: 'x' is an invalid keyword argument for print()
     ```
+
+
+### sorted
+[sorted key lambda 관련 자료](https://kingofbackend.tistory.com/98)
