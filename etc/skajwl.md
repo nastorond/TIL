@@ -54,3 +54,9 @@ spl2 = 'i' or 'b' # i
 spl3 = 'i' and 'b' # b
 spl4 = 'b' and 'i' # i
 ```
+
+### ebnf 표기법
+- '[ ]' => 선택인자, 프로그래밍 언어에서 문법을 표준화 시키기 위해 사용하는 것</br>주로 공식문서에서 표기
+    ```python
+    s.replace(old, new[,count])
+    ```

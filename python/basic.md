@@ -1,3 +1,19 @@
+## 자료구조
+- 우리가 컴퓨터에 있는 데이터를 효율적으로 저장, 관리하기 위해 사용
+- method 와 function 기능적으로는 거의 동일
+
+## method
+- 객체(class)에 속한 함수
+- 객체의 상태를 조작하거나 동작을 수행
+- 데이터타입 객체.method()
+    - 예제
+        ```python
+        'hello'.capitalize() # Hello
+        ```
+
+### 시퀀스 데이터 구조
+- 여러개의 값들을 **순서대로 나열**하여 저장하는 자료형 // 정렬아님
+
 ## f-string
 ```python
 bugs = roaches
@@ -17,14 +33,67 @@ print(f'{3.141592:.4f}') ## 4번째 자리까지 출력
 ```
 
 ## 문자열
-```python
-my_str = 'hello'
-print(my_str[2:4]) ## ll
-print(my_str[::-1]) ## olleh
+- string
+    ```python
+    my_str = 'hello'
+    print(my_str[2:4]) ## ll
+    print(my_str[::-1]) ## olleh
 
-## TypeError: 'str' object does not support item assignment
-my_str[1]='z'
-```
+    ## TypeError: 'str' object does not support item assignment
+    my_str[1]='z'
+    ```
+
+    - 문자열 조회/탐색 및 검증 method
+        ```python
+        s.find(x) # index 0 부터 탐색, 없으면 -1 반환
+        s.index(x) # index 0 부터 탐색, 없으면 ValueError
+        s.isalpha() # 알파벳 문자여부, 단순 알파벳이 아닌 유니코드 상 Letter(한국어 포함)
+        s.isupper()
+        s.islower()
+        s.istitle()
+        ```
+     - 문자열 조작 메서드
+        ```python
+        s.replace(old, new[,count]) # old를 new로 바꿔서 변환
+        s.strip() # 시작과 끝에 있는 공백 혹은 지정문자 제거
+        s.split(sep=None, maxsplit=-1)
+        'separator'.join([iterable])
+        'hello world'.capitalize() # Hello world
+        'hello world'.title() # Hello World
+        s.upper() 
+        s.lower()
+        s.swapcase() # 대,소문자 서로 변경
+        ```
+    - 예시
+        ```python
+        text = 'heLLo, woRld!'
+        new_text = text.swapcase().replace('l','z')
+        print(new_text) # HEzzo, WOrLD!
+        ```
+    - 문자열에 포함된 문자들의 유형을 판별하는 method
+        - isdecimal() 문자열이 모두 숫자
+        - isdigit() 유니코드도 숫자로 인식
+        - isnumeric() 몇가지 추가적인 유니코드 문자들을 인식(분수, 지수, 루트기호 등)</br>
+        ==> isdeciaml < isdigit < isnumeric
+
+## list
+- 리스트값 추가 및 삭제 method
+    ```python
+    L.append()
+    L.extend()
+    L.insert(i, x) # 인덱스 i에 항목 x삽입
+    L.remove(x) # index 0부터 탐색, x 제거, 없으면 Value Error
+    L.pop()
+    L.pop(i) # List[i] pop
+    L.clear()
+    ```
+- 리스트 탐색 및 정렬 method
+    ```python
+    L.index(x, strt, end)
+    L.reverse() # 순서 뒤집기
+    L.sort() # 원본리스트 정렬
+    L.count(x)
+    ```
 
 ## function
 - parameter : 매개변수, 함수를 정의할 때 사용
@@ -133,3 +202,5 @@ else: # for문이 끝날 떄 까지 break가 없었다면 실행
 
 ## 단축키
 - ctrl + alt + 화살표 아래 or 위 한번에 여러줄 선택
+
+### [python 3.9 documents](https://docs.python.org/3.9/)
