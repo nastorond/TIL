@@ -26,6 +26,28 @@ print(my_set_1) # set()
 print(my_set_2) # {1, 2, 3}
 print(my_set_3) # {1}
 ```
+- 고유한 항목들의 정렬되지 않은 컬렉션
+- 중복된값을 허용하지 않음
+    ```python
+    s.add(x) # x추가, 이미 있으면 동일
+    s.clear() # print(s) -> set()
+    s.remove(x) # 없으면 key error
+    s.pop() # 랜덤하게 pop
+    s.discard(x) # x제거, 없어도 에러 x
+    x.update(iterable) # append
+    ```
+    - pop 실행할때마다 다른요소를 얻는 다는 의미가 아니라 **임의**라는 의미에서 무작위</br> hash table에 저장되는 순서에 따라 나옴
+        - 문자열은 저장될 때 마다 위치가 바뀌지만 정수는 안바뀜</br> -> 객체의 타입에 따라 바뀐다
+
+- 집합 method
+    ```python
+    set1.difference(set2) # set1-set2
+    set1.intersection(set2) # set1&set2 교집합
+    set1.issubset(set2) # set1<=set2
+    set1.issuperset(set2) # set1>=set2 # 부분집합
+    set1.union(set2) # set1|set2 합집합
+    ```
+
 
 ## stack && queue
 - pop
@@ -119,6 +141,22 @@ li.pop(idx) # li[idx] pop
     print(*my_dict) # x y
     list(**my_dict) # TypeError: list() takes no keyword arguments
     print(**my_dict) # TypeError: 'x' is an invalid keyword argument for print()
+    ```
+### dictionary
+- 고유한 항목들의 정렬되지 **않은** collection
+    ```python
+    D.clear()
+    D.get(k) # value or None/default value
+    D.get(k,'Unknown') # return value or Unknown
+    D.get(k, v)
+    D.keys()
+    D.values()
+    D.items()
+    D.pop(k)
+    D.pop(k,v)
+    D.setdefault(k)
+    D.setdefault(k, v)
+    D.update(other) # 제공된 key/value 값으로 딕셔너리 추가/갱신, 기존의 존재하는 key는 덮어씀
     ```
 
 
