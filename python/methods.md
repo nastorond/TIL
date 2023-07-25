@@ -142,7 +142,6 @@ li.pop(idx) # li[idx] pop
     list(**my_dict) # TypeError: list() takes no keyword arguments
     print(**my_dict) # TypeError: 'x' is an invalid keyword argument for print()
     ```
-### dictionary
 - 고유한 항목들의 정렬되지 **않은** collection
     ```python
     D.clear()
