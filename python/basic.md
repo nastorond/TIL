@@ -472,6 +472,62 @@ else: # for문이 끝날 떄 까지 break가 없었다면 실행
   
         return b
     ```
+## 배열
+### 2차원 배열
+- 1차원 List 를 묶어 놓은 List
+- 2차원 이상의 다차원 List 는 차원에 따라 Index 를 선언
+- 2차원 List 의 선언: 세로길이(행의 개수), 가로길이(열의 개수)를 필요로 함
+- Python 에서는 데이터 초기화를 통해 변수선언과 초기화가 가능
+- 배열 순회
+    - 행 우선 순회
+        ```python
+        # i == 행의 좌표
+        # j == 열의 좌표
+        for i in range(n):
+            for j in range(m):
+                func(Arr[i][j])
+        ```
+    - 열 우선 순회
+        ```python
+        for j in range(m):
+            for i in range(n):
+                func(Arr[i][j])
+        ```
+    - 지그재그 순회
+        ```python
+        for i in range(n):
+            for j in range(m):
+                func(Arr[i][j+(m-1-2*j)*(i%2)])
+        ```
+    - 델타를 이용한 2차 배열 탐색
+        - 2차 배열의 한 좌표에서 4방향의 인접 배열 요소를 탐색하는 방법
+        ```python
+        arr[0...N-1][0...N-1] # NxN 행렬
+        di = [0, 1, 0, -1] # 상하 좌우
+        dj = [1, 0, -1, 0]
+        # di = [1, 1, -1, -1] # 대각선
+        # dj = [1, -1 ,-1 ,1]
+        for i in range(N):
+            for j in range(N):
+                for k in range(4):
+                    ni = i + di[j]
+                    nj = j + dj[k]
+                    if 0 <= ni < N and 0 <= nj < N: # 유효한 인덱스인지 검증
+                        func(arr[ni][nj])
+                    """
+                    if 0 <= ni and ni < N: # 위와 동일
+                        if 0 <= nj and nj < N:
+                            func(arr[ni][nj])
+                    """
+        ```
+    - 전치 행렬
+        ```python
+        arr = [[1,2,3],[4,5,6],[7,8,9]]
+        for i in range(3):
+            for j in range(3):
+                if i < j:
+                    arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
+        ```
 ## 오늘의 문제
 ## 단축키
 - ctrl + alt + 화살표 아래 or 위 한번에 여러줄 선택
