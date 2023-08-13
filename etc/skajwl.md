@@ -60,3 +60,5 @@ spl4 = 'b' and 'i' # i
 - 시간 복잡도 함수 중에서 가장 큰 영향력을 주는 n에 대한 항만을 표시
 - 계수(*Coefficient*)는 생략하여 표시
 - 초당 1e9의 연산 수행
+### 참고자료
+- [python 메모리 관련](https://yomangstartup.tistory.com/105)
