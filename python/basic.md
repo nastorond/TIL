@@ -442,6 +442,218 @@ else: # for문이 끝날 떄 까지 break가 없었다면 실행
     except Exception as e:
         print(e)
     ```
+## 정렬
+### 카운팅 정렬
+- 항목들의 순서를 결정하기 위해 각 항목이 몇 개씩 있는지 세는 작업을 하여, 선형 시간에 정렬하는 효율적인 알고리즘
+- 제한사항
+    - 정수나 정수로 표현할 수 있는 자료에 대해서만 적용 가능
+    - 집합내에 가장 큰 정수를 알아야 한다
+- 시간복잡도
+    - O(n + k) n: 리스트 길이, k: 정수의 최대값
+- 정렬
+    - Data에 각 항목들의 발생 회수를 세고, 정수 항목들로 직접 인덱스 되는 카운트 배열 counts에 저장한다
+    - 정렬된 집합에서 각 항목의 앞에 위치할 항목의 개수를 반영하기 위해 counts의 원소를 조정
+    - 맨 마지막 원소부터 접근해 해당 원소를 counts에서 감소시키고 새로운 list에 삽입한다
+    ```python
+    def counting_sort(a, b, k):
+    # a 입력배열
+    # b 정렬된 배열
+    # c 카운트 배열
+        c = [0]*(k+1)
+        for i in range(0, len(a)):
+            c[a[i]] += 1
+        
+        for i in range(1, len(c)):
+            c[i] += c[i-1]
+    
+        for i in range(len(b)-1, -1 , -1):
+            c[a[i]] -= 1
+            b[c[a[i]]] = a[i]
+  
+        return b
+    ```
+## 배열
+### 2차원 배열
+- 1차원 List 를 묶어 놓은 List
+- 2차원 이상의 다차원 List 는 차원에 따라 Index 를 선언
+- 2차원 List 의 선언: 세로길이(행의 개수), 가로길이(열의 개수)를 필요로 함
+- Python 에서는 데이터 초기화를 통해 변수선언과 초기화가 가능
+- 배열 순회
+    - 행 우선 순회
+        ```python
+        # i == 행의 좌표
+        # j == 열의 좌표
+        for i in range(n):
+            for j in range(m):
+                func(Arr[i][j])
+        ```
+    - 열 우선 순회
+        ```python
+        for j in range(m):
+            for i in range(n):
+                func(Arr[i][j])
+        ```
+    - 지그재그 순회
+        ```python
+        for i in range(n):
+            for j in range(m):
+                func(Arr[i][j+(m-1-2*j)*(i%2)])
+        ```
+    - 델타를 이용한 2차 배열 탐색
+        - 2차 배열의 한 좌표에서 4방향의 인접 배열 요소를 탐색하는 방법
+        ```python
+        arr[0...N-1][0...N-1] # NxN 행렬
+        di = [0, 1, 0, -1] # 상하 좌우
+        dj = [1, 0, -1, 0]
+        # di = [1, 1, -1, -1] # 대각선
+        # dj = [1, -1 ,-1 ,1]
+        for i in range(N):
+            for j in range(N):
+                for k in range(4):
+                    ni = i + di[j]
+                    nj = j + dj[k]
+                    if 0 <= ni < N and 0 <= nj < N: # 유효한 인덱스인지 검증
+                        func(arr[ni][nj])
+                    """
+                    if 0 <= ni and ni < N: # 위와 동일
+                        if 0 <= nj and nj < N:
+                            func(arr[ni][nj])
+                    """
+        ```
+    - 전치 행렬
+        ```python
+        arr = [[1,2,3],[4,5,6],[7,8,9]]
+        for i in range(3):
+            for j in range(3):
+                if i < j:
+                    arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
+        ```
+## 부분집합
+### 부분집합 합 문제
+- 유한 개의 정수로 이루어진 집합이 있을 때, 이 집합의 부분집합 중에서
+그 집합의 원소를 모두 더한 값이 0이 되는 경우가 있는지 확인하는 문제
+- 완전검색 기법으로 부분집합 합 문제를 풀기 위해서는, 우선 집합의 모든 부분집합을 생성한 후에 각 부분집합의 합을 계산
+- 부분집합의 수
+    - 집합의 원소가 n개 일 때, 공집합을 포함한 부분집합의 수는 2**n 개
+    - 이는, 각 원소를 부분집합에 포함시키거나 포함시키지 않는 2가지 경우를 모든 원소에 적용한 경우의 수와 같다
+    - bit 배열로 만들어서 연산
+    - 각 원소가 부분집합에 포함되있는지를 loop 이용하여 확인하고 부분집합을 생성
+        ```python
+        def print_subset(bit, arr, n);
+            total = 0
+            for i in range(n):
+                if bit[i]
+                    print(arr[i], end = ' ')
+                    total += arr[i]
+            print(bit) # 놓침
+        arr = [1, 2, 3, 4]
+        bit = [0, 0, 0, 0]
+        for i in range(2):
+            bit[0] = i
+            for j in range(2):
+                bit[1] = j
+                for k in range(2):
+                    bit[2] = k
+                    for l in range(2):
+                        bit[3] = l
+                        print_subset(bit, arr, 4)
+        ```
+- 비트연산자로 계산
+    - & 비트단위로 AND 연산
+    - | 비트단위로 OR 연산
+    - << 피연산자의 비트 열을 왼쪽으로 이동
+    - \>\> 피연산자의 비트 열을 오른쪽으로 이동
+    </br></br>
+    - << 연산자
+        - 1 << n : 2**n 즉, 원소가 n개일 경우의 모든 부분집합의 수를 의미
+    - & 연산자
+        - i & (1 << j) : i의 j번째 비트가 1인지 아닌지를 검사한다.
+            - i: 생성한 비트 열
+    ```python
+    arr = [3, 6, 7, 1, 5, 5]
+    n = len(arr)
+    for i in range(1<<n): # 1<<n : 부분집합의 개수
+        for j in range(n): # 원소의 수만큼 비트를 비교
+            if i & (1 << j): # i의 j번 비트가 1인 경우
+                print(arr[j], end = ", ") # j 번 원소 출력
+    ```
+## 검색
+- 저장되어 있는 자료 중에서 원하는 항목을 찾는 작업
+- 목적하는 탐색키를 가진 항목을 찾는것
+### 순차검색
+- 일렬로 되어 있는 자료를 순서대로 검색하는 방법
+    - 가장 간단하고 직관적
+    - 배열이나 연결 리스트 등 순차구조로 구현된 자료구조에서 원하는 항목을 찾을 때 유용
+    - 알고리즘이 단순, 구현하기 쉽지만, 검색대상이 많을 경우 비효율적
+- 2가지 경우로 나눠서 할 수 있음
+- 정렬되어 있지 않은 경우
+    - 검색과정
+        - 첫 번째 원소부터 순서대로 검색 대상과 키 값이 같은 원소가 있는지 비교하며 찾음
+        - 키 값이 동일한 원소를 찾으면 그 원소의 인덱스 반환
+        - 자료구조의 마지막에 이를 때까지 찾지못하면 검색 실패
+        - 찾고자 하는 원소의 순서에 따라 비교횟수가 결정됨
+### 이진검색 *Binary Search*
+- 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색
+    - 목적 키를 찾을 때까지 이진 검색을 순환적으로 반복 수행함으로써 검색범위를 반으로 줄여가면서 보다 빠르게 검색을 수행
+- 이진 검색을 하기 위해선 자료가 정렬되어 있어야함
+- 검색과정
+    - 자료의 중앙에 있는 원소를 고른다
+    - 중앙 원소의 값과 찾고자 하는 목표 값을 비교
+    - 목표 값이 중앙 원소의 값보다 작으면 자료의 왼쪽 반에 대해서 새로 검색을 수행하고, 크다면 자료의 오른쪽 반에 대해서 새로 검색 수행
+    - 찾고자 하는 값을 찾을 때 까지 1 ~ 3의 과정 반복
+- 구현
+    - 검색 범위의 시작점과 종료점을 이용하여 검색을 반복 수행
+    - 이진 검색의 경우, 자료에 삽입이나 삭제가 발생했을 때 배열의 상태를 항상 정렬 상태로 유지하는 추가작업이 필요하다
+    ```python
+    def binarySearch(a, N, key):
+        start = 0
+        end = N-1
+        while start <= end:
+            mid = (start + end)//2
+            if a[mid] == key:
+                return True
+            elif a[mid] > key:
+                end = mid - 1
+            else:
+                start = mid + 1
+        return False
+    def binarySearch2(a, low, high, key):
+        if low > high:
+            return False
+        else:
+            mid = (low, high)//2
+            if key == a[mid]:
+                return True
+            elif key < a[mid]:
+                return binarySearch2(a, low, mid-1, key)
+            elif key < a[mid]:
+                return binarySearch2(a, mid-1, high, key)
+    ```
+### 선택정렬 *Selection Sort*
+- 주어진 자료들 중 가장 작은 값의 원소부터 차례대로 선택하여 위치를 교환하는 방식
+    - 앞서 살펴본 셀렉션 알고리즘을 전체 자료에 적용한 것
+- 정렬 과정
+    - 주어진 리스트 중에서 최소값을 찾는다
+    - 그 값을 리스트의 맨 앞에 위치한 값과 교환한다
+    - 맨 처음 위치를 제외한 나머지 리스트를 대상으로 위의 과정 반복
+- 시간복잡도
+    - O(n**2)
+- 구현
+    ```python
+    def SelectSort(a, n):
+        for i in range(n-1):
+            minIdx = i
+            for j in range(i+1, N):
+                if a[minIdx] > a[j]:
+                    minIdx = j
+            a[i], a[minIdx] = a[minIdx], a[i]
+    ```
+- 셀렉션 알고리즘(선택정렬 응용)
+- 저장되어 있는 자료로부터 K번째로 큰 혹은 작은 원소를 찾는 방법
+    - 최소, 최대 혹은 중간값을 찾는 알고리즘을 의미
+- 선택과정
+    - 정렬 알고리즈을 이용하여 자료 정렬
+    - 원하는 순서에 있는 원소 가져오기
 ## 오늘의 문제
 ## 단축키
 - ctrl + alt + 화살표 아래 or 위 한번에 여러줄 선택
