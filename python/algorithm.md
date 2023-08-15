@@ -1,7 +1,39 @@
-## 그래프 탐색
-### *dfs*
+# 그래프 탐색
+## 그래프탐색 알고리즘
+- 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요
+- 두 가지 방법
+- 깊이 우선 탐색 *Depth First Search DFS*   <- Stack
+- 너비 우선 탐색 *Breadth First Search BFS* <- Queue
+### 깊이우선탐색 *DFS*
+- 시작 정점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더이상 갈 곳이 없게되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하는 순회방법
+- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
+- 알고리즘
+    - 시작 정점 v를 결정하여 방문
+    - 정점 v에 인접한 정점 중에서
+        - 방문하지 않은 정점 w가 있으면, 정점 v를 스택에 push하고 정점 w를 방문한다.</br>
+          그리고 w를 v로 하여 다시 반복한다
+        - 방문하지 않은 정점이 없으면, 탐색의 방향을 바꾸기 위해서 스택을 pop하여 받은</br> 
+          가장 마지막 방문 정점을 v로 하여 다시 반복한다.
+    - 스택이 공백이 될 때까지 위 과정을 반복
+    - pesudo code
+        ```python
+        # visited[], stack[] 초기화
+        DFS(v)
+            # 시작점 v 방문
+            visited[v] = True
+            while 1:
+                if v 의 인접 정점 중 방문 안 한 정점 w 가 있으면 gp[v]:
+                    push(v)
+                    v = w # w에 방문
+                    visited[w] = True
+                else:
+                    if not gp[v]:
+                        pop(v)
+                    else:
+                        break
 - 구현
     ```python
+    # 백트레킹에 더 가까움
     n,m = map(int, input().split())
     res = []
     vi = [0]*(n+1)
@@ -138,8 +170,6 @@
     - 카프-라빈 알고리즘 : $\theta$(n)
     - KMP 알고리즘 : $\theta$(n)
     - 보이어 무어 : $\Omega$(n)
-
-
 ## 자료구조
 ### 스택
 - 특성
@@ -165,6 +195,48 @@
 - 자기 자신을 호출하여 순환 수행 되는 것
 - 함수에서 실행해야 하는 작업의 특성에 따라 일반적인 호출방식보다 재귀호출방식을 사용하여 함수를 만들면 프로그램의 크기를 줄이고 간단하게 작성 가능
 ![Alt text](/image/image-2.png)
+### 후위표기법
+- 구현
+    - 우선순위를 정해준뒤 dictionary 형으로 정리해서 표기해준다.
+    - 중위표기법으로 되어있는 수식을 앞에서부터 하나씩 탐색하면서 진행
+    - 숫자가 나오면 결과 수식에 넣어주고
+    - 연산자나 여는 괄호가 나오면 우선순위에 따라 정리한다.
+        - 만약 현재 차례의 연산자가 우선순위가 낮다면 stack에 넣어주고
+        - 아니라면 우선순위가 더 높은것이 나올 때 까지 stack에서 빼서 결과 수식에 넣어준다
+    - 닫는 괄호가 나온다면 여는괄호가 나올 때 까지 stack에서 빼서 결과 수식에 넣는다
+    - 모든 과정이 끝난 후 별도의 연산과정이 끝났다는 표기가 없다면 stack에 들어있는 마지막 연산자를 결과수식에 넣는다
+    ```python
+    import sys
+
+    # input = sys.stdin.readline
+
+    infix_list = input().rstrip()
+
+    icp = {'(': 3, '+': 1, '-': 1, '*': 2, '/': 2}
+    isp = {'(': 0, '+': 1, '-': 1, '*': 2, '/': 2}
+
+    postfix_fx = ''
+    stack = []
+
+    for x in infix_list:
+        if x.isdigit():
+        postfix_fx += x
+        elif x == ')':
+            while stack[len(stack)-1] != '(':
+                postfix_fx += stack.pop()
+            stack.pop()
+        else:
+            if not stack or icp[x] > isp[stack[-1]]:
+                stack.append(x)
+            elif icp[x] <= isp[stack[-1]]:
+                while len(stack) > 0 and icp[x] <= isp[stack[-1]]:
+                    postfix_fx += stack.pop()
+                stack.append(x)
+    if stack:
+        while stack:
+            postfix_fx += stack.pop()
+    print(postfix_fx)
+    ```
 ## DP
 ### *Dynamic Programming*
 - 동적 계획 알고리즘은 그리디 알고리즘과 같이 ***최적화 문제***를 해결하는 알고리즘
@@ -195,35 +267,3 @@
     - iterative 방식
     - memoization을 재귀적 구조에 사용하는 것 보다 반복적 구조로 DP를 구현한 것이 성능 면에서 보다 효율적이다.
     - 재귀적 구조는 내부에 시스템 호출 스택을 사용하는 오버헤드가 발생하기 때문
-## 그래프탐색 알고리즘
-- 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요
-- 두 가지 방법
-- 깊이 우선 탐색 *Depth First Search DFS*   <- Stack
-- 너비 우선 탐색 *Breadth First Search BFS* <- Queue
-### 깊이우선탐색 *DFS*
-- 시작 정점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더이상 갈 곳이 없게되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하는 순회방법
-- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
-- 알고리즘
-    - 시작 정점 v를 결정하여 방문
-    - 정점 v에 인접한 정점 중에서
-        - 방문하지 않은 정점 w가 있으면, 정점 v를 스택에 push하고 정점 w를 방문한다.</br>
-          그리고 w를 v로 하여 다시 반복한다
-        - 방문하지 않은 정점이 없으면, 탐색의 방향을 바꾸기 위해서 스택을 pop하여 받은</br> 
-          가장 마지막 방문 정점을 v로 하여 다시 반복한다.
-    - 스택이 공백이 될 때까지 위 과정을 반복
-    - pesudo code
-        ```python
-        # visited[], stack[] 초기화
-        DFS(v)
-            # 시작점 v 방문
-            visited[v] = True
-            while 1:
-                if v 의 인접 정점 중 방문 안 한 정점 w 가 있으면 gp[v]:
-                    push(v)
-                    v = w # w에 방문
-                    visited[w] = True
-                else:
-                    if not gp[v]:
-                        pop(v)
-                    else:
-                        break
