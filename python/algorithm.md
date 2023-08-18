@@ -1,107 +1,3 @@
-# 그래프 탐색
-## 그래프탐색 알고리즘
-- 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요
-- 두 가지 방법
-- 깊이 우선 탐색 *Depth First Search DFS*   <- Stack
-- 너비 우선 탐색 *Breadth First Search BFS* <- Queue
-### 깊이우선탐색 *DFS*
-- 시작 정점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더이상 갈 곳이 없게되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하는 순회방법
-- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
-- 알고리즘
-    - 시작 정점 v를 결정하여 방문
-    - 정점 v에 인접한 정점 중에서
-        - 방문하지 않은 정점 w가 있으면, 정점 v를 스택에 push하고 정점 w를 방문한다.</br>
-          그리고 w를 v로 하여 다시 반복한다
-        - 방문하지 않은 정점이 없으면, 탐색의 방향을 바꾸기 위해서 스택을 pop하여 받은</br> 
-          가장 마지막 방문 정점을 v로 하여 다시 반복한다.
-    - 스택이 공백이 될 때까지 위 과정을 반복
-    - pesudo code
-        ```python
-        # visited[], stack[] 초기화
-        DFS(v)
-            # 시작점 v 방문
-            visited[v] = True
-            while 1:
-                if v 의 인접 정점 중 방문 안 한 정점 w 가 있으면 gp[v]:
-                    push(v)
-                    v = w # w에 방문
-                    visited[w] = True
-                else:
-                    if not gp[v]:
-                        pop(v)
-                    else:
-                        break
-- 구현
-    ```python
-    # 백트레킹에 더 가까움
-    n,m = map(int, input().split())
-    res = []
-    vi = [0]*(n+1)
-
-    def dfs():
-        if len(res) == m:
-            print(*res)
-            return 
-
-        for i in range(1,n+1):
-            if vi[i] == 0:
-                res.append(i)
-                vi[i] = 1
-                dfs()
-                vi[i] = 0
-                res.pop()
-    dfs()
-    ## permutations와 동일하게 출력
-    ```
-### *bfs*
-- *Breath-First-Search* 너비 우선 탐색
-- 시간복잡도
-    - O(V+E) 노드의 개수 + 간선의 개수
-- 모든 간선의 비용이 동일한 조건에서 최단 거리를 구하는 문제를 효과적으로 해결 할 수 있는 알고리즘
-    - 미로를 빠져나가는 최단 거리(경로) 등
--가까운 노드부터 우선적으로 탐색, *Queue*의 자료구조를 사용
-- 인접한 노드들을 반복적으로 큐에 넣어주고, 먼저 삽입된 노드부터 차례로 꺼냄
-- 알고리즘 동작 방식
-    - 탐색 시작 노드 정보를 큐에 삽입하고 **방문처리**
-    - 큐에서 노드를 꺼내 방문하지 않은 인접 노드 정보를 모두 큐에 삽입하고 방문처리
-    - 2번의 과정을 더 이상 수행할 수 없을 때까지 반복
-- 너비우선탐색은 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로하여 다시 인접한 정점들을 차례로 방문하는 방식
-- 인접한 정점들에 대해 탐색을 한 후, 차례로 다시 너비운선탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용함
-- 거리순 탐색에 유용
-- 구현
-    ```python
-    from collections import deque
-    def bfs(gp, v, visited):
-        # q 구현을 위한 deque 사용
-        que = deque([v])
-        # 현재 노드 방문처리
-        visited[v] = True
-        # 큐가 완전히 빌 때까지 반복
-        while que:
-            # 큐에 삽입된 순서대로 노드 하나 꺼내기
-            r = que.popleft()
-            # 탐색 순서 출력
-            print(r, end = ' ')
-            # 현재 처리 중인 노드에서 방문하지 않은 인접 노드를 모두 큐에 삽입
-            for i in gp[r]:
-                if not visited[i]:
-                    que.append(i)
-                    visited[i] = True
-    ```
-    ```python
-    def bfs(g, v):
-        visited = [0]*(n+1)             # n : 정점의 개수
-        q = deque()                     # 큐 생성
-        q.append(v)                     # 시작점 v를 큐에 삽입
-        visited[v] = 1                  # 방문처리
-        while q:                        # 큐가 비어있지 않은 경우
-            t = q.popleft()             # 큐의 첫번째 원소 반환
-            visit(t)                    # 정점 t에서 할 일
-            for i in g[t]:              # t와 연결된 모든 정점에 대해
-                if not visitied[i]:     # 방문되지 않은 곳이라면
-                    q.append(i)         # 큐에넣기
-                    visited[i] = visited[t] + 1 # t 로 부터 1만큼 이동
-    ```
 ## 재귀
 ### 재귀 함수
 - 함수 내부에서 자기 자신을 호출하는 함수
@@ -367,6 +263,77 @@ def deQueue():
                     else:
                         break
         ```
+- 구현
+    ```python
+    # 백트레킹에 더 가까움
+    n,m = map(int, input().split())
+    res = []
+    vi = [0]*(n+1)
+
+    def dfs():
+        if len(res) == m:
+            print(*res)
+            return 
+
+        for i in range(1,n+1):
+            if vi[i] == 0:
+                res.append(i)
+                vi[i] = 1
+                dfs()
+                vi[i] = 0
+                res.pop()
+    dfs()
+    ## permutations와 동일하게 출력
+    ```
+### *bfs*
+- *Breath-First-Search* 너비 우선 탐색
+- 시간복잡도
+    - O(V+E) 노드의 개수 + 간선의 개수
+- 모든 간선의 비용이 동일한 조건에서 최단 거리를 구하는 문제를 효과적으로 해결 할 수 있는 알고리즘
+    - 미로를 빠져나가는 최단 거리(경로) 등
+-가까운 노드부터 우선적으로 탐색, *Queue*의 자료구조를 사용
+- 인접한 노드들을 반복적으로 큐에 넣어주고, 먼저 삽입된 노드부터 차례로 꺼냄
+- 알고리즘 동작 방식
+    - 탐색 시작 노드 정보를 큐에 삽입하고 **방문처리**
+    - 큐에서 노드를 꺼내 방문하지 않은 인접 노드 정보를 모두 큐에 삽입하고 방문처리
+    - 2번의 과정을 더 이상 수행할 수 없을 때까지 반복
+- 너비우선탐색은 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로하여 다시 인접한 정점들을 차례로 방문하는 방식
+- 인접한 정점들에 대해 탐색을 한 후, 차례로 다시 너비운선탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용함
+- 거리순 탐색에 유용
+- 구현
+    ```python
+    from collections import deque
+    def bfs(gp, v, visited):
+        # q 구현을 위한 deque 사용
+        que = deque([v])
+        # 현재 노드 방문처리
+        visited[v] = True
+        # 큐가 완전히 빌 때까지 반복
+        while que:
+            # 큐에 삽입된 순서대로 노드 하나 꺼내기
+            r = que.popleft()
+            # 탐색 순서 출력
+            print(r, end = ' ')
+            # 현재 처리 중인 노드에서 방문하지 않은 인접 노드를 모두 큐에 삽입
+            for i in gp[r]:
+                if not visited[i]:
+                    que.append(i)
+                    visited[i] = True
+    ```
+    ```python
+    def bfs(g, v):
+        visited = [0]*(n+1)             # n : 정점의 개수
+        q = deque()                     # 큐 생성
+        q.append(v)                     # 시작점 v를 큐에 삽입
+        visited[v] = 1                  # 방문처리
+        while q:                        # 큐가 비어있지 않은 경우
+            t = q.popleft()             # 큐의 첫번째 원소 반환
+            visit(t)                    # 정점 t에서 할 일
+            for i in g[t]:              # t와 연결된 모든 정점에 대해
+                if not visitied[i]:     # 방문되지 않은 곳이라면
+                    q.append(i)         # 큐에넣기
+                    visited[i] = visited[t] + 1 # t 로 부터 1만큼 이동
+    ```
 
 ## 백트래킹
 - 백트래킹 기법은 해를 찾는 도중에 '막히면' 되돌아가서 다시 해를 찾아가는 기법
