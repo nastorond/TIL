@@ -1,7 +1,39 @@
-## 그래프 탐색
-### *dfs*
+# 그래프 탐색
+## 그래프탐색 알고리즘
+- 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요
+- 두 가지 방법
+- 깊이 우선 탐색 *Depth First Search DFS*   <- Stack
+- 너비 우선 탐색 *Breadth First Search BFS* <- Queue
+### 깊이우선탐색 *DFS*
+- 시작 정점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더이상 갈 곳이 없게되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하는 순회방법
+- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
+- 알고리즘
+    - 시작 정점 v를 결정하여 방문
+    - 정점 v에 인접한 정점 중에서
+        - 방문하지 않은 정점 w가 있으면, 정점 v를 스택에 push하고 정점 w를 방문한다.</br>
+          그리고 w를 v로 하여 다시 반복한다
+        - 방문하지 않은 정점이 없으면, 탐색의 방향을 바꾸기 위해서 스택을 pop하여 받은</br> 
+          가장 마지막 방문 정점을 v로 하여 다시 반복한다.
+    - 스택이 공백이 될 때까지 위 과정을 반복
+    - pesudo code
+        ```python
+        # visited[], stack[] 초기화
+        DFS(v)
+            # 시작점 v 방문
+            visited[v] = True
+            while 1:
+                if v 의 인접 정점 중 방문 안 한 정점 w 가 있으면 gp[v]:
+                    push(v)
+                    v = w # w에 방문
+                    visited[w] = True
+                else:
+                    if not gp[v]:
+                        pop(v)
+                    else:
+                        break
 - 구현
     ```python
+    # 백트레킹에 더 가까움
     n,m = map(int, input().split())
     res = []
     vi = [0]*(n+1)
@@ -155,8 +187,6 @@
     - 카프-라빈 알고리즘 : $\theta$(n)
     - KMP 알고리즘 : $\theta$(n)
     - 보이어 무어 : $\Omega$(n)
-
-
 ## 자료구조
 ### 스택
 - 특성
@@ -182,98 +212,6 @@
 - 자기 자신을 호출하여 순환 수행 되는 것
 - 함수에서 실행해야 하는 작업의 특성에 따라 일반적인 호출방식보다 재귀호출방식을 사용하여 함수를 만들면 프로그램의 크기를 줄이고 간단하게 작성 가능
 ![Alt text](/image/image-2.png)
-### 스택을 활용한 계산기 만들기
-- 문자열로 계산된 계산식이 주어질 때, 스택을 이용하여 계산
-- 문자열 수식 계산의 일반적 방법
-    - 중위표기법 : A+B
-    - 후위표기법 : AB+
-    - 중위 표기법의 수식을 후위표기법으로 변경
-        - 수식의 각 연산자에 대해 우선순위에 따라 괄호를 사용해 다시 표현
-        - 각 연산자를 그에 대응하는 오른쪽괄호의 뒤로 이동
-        - 괄호 제거
-        ```python
-        # A*B-C/D
-        # ((A*B)-(C/D))
-        # ((AB)*(CD)/)-
-        # AB*CD/-
-        ```
-    - 후위 표기법의 수식을 스택을 이용해 계산
-        - 피연산자를 만나면 스택에 push
-        - 연산자를 만나면 필요한 만큼의 피연산자를 스택에서 pop 하여 연산하고, </br>연산결과를 다시 스택에 push 한다.
-        - 수식이 끝나면, 마지막으로 스택을 pop 하여 출력한다.
-        ```python
-        # 후위 표기법 계산 예제코드
-        stack = [0]*100
-        top = -1
-        susik = "6528-*2/+"
-        for x in susik:
-            if x not in '+-/*':
-                top += 1
-                stack[top] = int(x)
-            else:
-                op1 = stack[top]
-                top -= 1
-                op2 = stack[top]
-                top -= 1
-                if x == '+':    # op2 + op1
-                    top += 1
-                    stack[top] = op2 + op1
-                elif x == '-':
-                    top += 1
-                    stack[top] = op2 - op1
-                elif x == '/':
-                    top += 1
-                    stack[top] = op2 / op1
-                elif x == '*':
-                    top += 1
-                    stack[top] = op2 * op1
-        print(stack[top])   # -9.0
-        ```
-## 큐 *Queue*
-- 스택과 마찬가지로 삽입과 삭제의 위치가 제한적인 자료구조, 선형적 자료구조
-- 선입선출 구조 FIFO First In First Out
-- 큐의 선입 선출 구조
-    - 머리부터 삭제, 꼬리쪽으로 삽입
-    - 머리(Front) : 저장된 원소 중 첫번째 원소
-    - 꼬리(Rear) : 저장된 원소 중 마지막 원소
-- 기본 연산
-    - 삽입 : enQueue
-    - 삭제 : deQueue
-### 원형 큐
-- 초기 공백 상태
-    - front = rear = 0
-- Index 의 순환
-    - front와 rear의 위치가 배열의 마지막 인덱스인 n-1를 가리킨 후, 그 다음에는</br>
-    논리적 순환을 이루어 배열의 처음 인덱스인 0으로 이동해야함
-    - 이를 위해 나머지 연산자 mod를 사용
-- front 변수
-    - 공백 상태와 포화 상태 구분을 쉽게 하기 위해 front 가 있는 자리는 사용하지 않고 항상 빈자리로 둠
-- 삽입 삭제 위치
-    - rear = (rear + 1) mod n
-    - fornt = (front + 1) mod n
-```python
-def isEmpty():
-    return front == rear
-
-def isFull():
-    return (rear+1)%len(cQ) == front
-
-def enQueue(item):
-    global rear
-    if isFull():
-        print("Queue_Full")
-    else:
-        rear = (rear+1)%len(cQ)
-        cQ[rear] = item
-        
-def deQueue():
-    global front
-    if isEmpty():
-        print("Queue_Empty")
-    else:
-        front = (front+1)&len(cQ)
-        return cQ[front]
-```
 ## DP
 ### *Dynamic Programming*
 - 동적 계획 알고리즘은 그리디 알고리즘과 같이 ***최적화 문제***를 해결하는 알고리즘
@@ -336,100 +274,3 @@ def deQueue():
                         pop(v)
                     else:
                         break
-        ```
-## 백트래킹
-- 백트래킹 기법은 해를 찾는 도중에 '막히면' 되돌아가서 다시 해를 찾아가는 기법
-- 최적화 문제와 결정 문제를 해결할 수 있다
-    - 결정문제 : 문제의 조건을 만족하는 해가 존재하는지의 여부를 'yes' or 'no'로 답하는 문제
-- 깊이우선과의 차이
-    - 가지치기를 한다.
-    - 불필요한 경로를 사전에 차단
-- 백트래킹 기법
-    - 어떤 노드의 유망성을 점검 한 후에 유망하지 않다고 결정되면 그 노드의 부모로 되돌아가 다음 자식 노드로 감
-    - 어떤 노드를 방문했을 때 그 노드를 포함한 경로가 해답이 될 수 없으면 그 노드는 유망하지 않다고 하며, 반대로 해답의 가능성이 있으면 유망하다고 함
-    - 가지치기 : 유망하지 않은 노드가 포함되는 경로는 더 이상 고려하지 않는다.
-- 일반 백트래킹 알고리즘
-    ```python
-    def checknode(v):
-        if promising(v):
-            if there is a solution at v:
-                write the solution
-            else:
-                for u in each child of v:
-                    checknode(u)
-    ```
-### 부분집합의 합 Backtracking 구현
-```python
-def f(i, N, s, t): # i 현재단계, N 목표, s i-1 원소까지 부분집합의 합, t 찾으려는 합
-    if s == t:  # 합을 찾은 경우
-        print(bit)
-        return
-    elif i == N:  # 남은 원소가 없는 경우
-        return
-    elif s > t: 
-        return
-    else:
-        bit[i] = 1  # 부분집합에 A[i] 포함
-        f(i+1, N, s + A[i])
-        bit[i] = 0  # 부분집합에 A[i] 미포함
-        f(i+1, N, s)
-        return
-N = 10
-A = [i for i in range(1, N+1)]
-bit = [0]*N
-f(0, N, 0, 1)
-```
-### 순열 만들기
-```python
-def f(i, N):
-    if i==N:
-        print(A)
-    else:
-        for j in range(i, N):
-            A[i], A[j] = A[j], A[i]
-            f(i+1, N)
-            A[i], A[j] = A[j], A[i]
-```
-## 분할 정복
-- 설계전략
-    - 분할 : 해결 할 문제를 여러 개의 작은 부분으로 나눈다.
-    - 정복 : 나눈 작은 문제를 각각 해결한다.
-    - 통합 : (필요하다면) 해결된 해답을 모은다.
-### 거듭제곱
-- 구현
-    ```python
-    def Power(Base, Exponent):
-        if Base == 0 or Exponent == 0:
-            return 1
-        
-        if Exponent % 2 == 0:
-            NewBase = Power(Base, Exponent/2)
-            return NewBase * Base
-        else:
-            NewBase = Power(Base, (Exponent - 1)/2)
-            return (NewBase  * NewBase) * Base
-    ```
-### 퀵 정렬
-- 주어진 배열을 두 개로 분할하고 각각을 정렬
-- 합병정렬과 다른점
-    - 합병정렬은 그냥 두 부분으로 나누는 반면에, 퀵정렬은 분할할 때,</br>기준아이템(pivot item) 중심으로, 이보다 작은것은 왼편, 큰것은 오른편에 위치시킨다.
-    - 각 부분의 정렬이 끝난 후, 합병정렬은 후처리가 필요한다.
-```python
-def quickSort(a, begin, end):
-    if begin < end:
-        p = partition(a, begin, end)
-        quickSort(a, begin, p-1)
-        quickSort(a, p + 1, end)
-def partition(a, begin, end):
-    pivot = (begin + end) // 2
-    L = begin
-    R = end
-    while L < R:
-        while(L<R and a[L]<a[pivot]): L += 1
-        while(L<R and a[R]>a[pivot]): R -= 1
-        if L < R:
-            if L == pivot: pivot = R
-            a[L], a[R]= a[R], a[L]
-    a[pivot], a[R] = a[R], a[pivot]
-    return R 
-```
