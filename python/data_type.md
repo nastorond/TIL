@@ -12,10 +12,10 @@
 - 포화 이진 트리 *Full Binary Tree*
     - 모든 레벨의 노드가 포화상태로 차 있는 이진 트리
     - 루트를 1번으로 하여 2**(h + 1) - 1 까지 정해진 위치에 대한 노드 번호를 가진다
-    ![Alt text](/image/full_bin_tree.png)
+    ![Alt text](image/full_bin_tree.png)
 - 완전 이진 트리 *Complete Binary Tree*
     - 높이가 h 이고 노드 수가 n 개일 때, 노드 번호 1번부터 n 번까지 빈자리가 없는 이진트리
-    ![Alt text](/image/comp_bin_tree.png)
+    ![Alt text](image/comp_bin_tree.png)
 - 평향 이진 트리 *Skewed Binary Tree*
     - 높이 h 에 대한 최소 개수의 노드를 가지면서 한쪽방향의 자식 노드만을가진 이진트리
     - 왼쪽 편향 이진 트리
@@ -23,7 +23,7 @@
 - 순회 *Traversal*
     - 트리의 각 노드를 중복되지 않게 전부 방문하는 것
     - 전위순회 *Preorder traversal*  VLR
-    ![Alt text](/image/preorder_traverse.png)
+    ![Alt text](image/preorder_traverse.png)
         ```python
         def preorder_traverse(T):
             if T:
@@ -32,7 +32,7 @@
                 preorder_traverse(T.right)
         ```
     - 중위순회 *Inorder traversal*   LVR
-    ![Alt text](/image/Inorder_traverse.png)
+    ![Alt text](image/Inorder_traverse.png)
         ```python
         def Inorder_traverse(T):
             if T:
