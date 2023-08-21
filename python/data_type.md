@@ -12,10 +12,10 @@
 - 포화 이진 트리 *Full Binary Tree*
     - 모든 레벨의 노드가 포화상태로 차 있는 이진 트리
     - 루트를 1번으로 하여 2**(h + 1) - 1 까지 정해진 위치에 대한 노드 번호를 가진다</br>
-    <img src = "./image/full_bin_tree.png" width = "70%" height = "70%">
+    <img src = "./image/full_bin_tree.png" width = "70%" height = "70%"></br>
 - 완전 이진 트리 *Complete Binary Tree*
     - 높이가 h 이고 노드 수가 n 개일 때, 노드 번호 1번부터 n 번까지 빈자리가 없는 이진트리</br>
-    <img src = "./image/comp_bin_tree.png" width = "70%" height = "70%">
+    <img src = "./image/comp_bin_tree.png" width = "70%" height = "70%"></br>
 - 평향 이진 트리 *Skewed Binary Tree*
     - 높이 h 에 대한 최소 개수의 노드를 가지면서 한쪽방향의 자식 노드만을가진 이진트리
     - 왼쪽 편향 이진 트리
@@ -23,7 +23,7 @@
 - 순회 *Traversal*
     - 트리의 각 노드를 중복되지 않게 전부 방문하는 것
     - 전위순회 *Preorder traversal*  VLR</br>
-    <img src = "./image/preorder_traverse.png" width = "70%" height = "70%">
+    <img src = "./image/preorder_traverse.png" width = "70%" height = "70%"></br>
         ```python
         def preorder_traverse(T):
             if T:
@@ -32,7 +32,7 @@
                 preorder_traverse(T.right)
         ```
     - 중위순회 *Inorder traversal*  LVR</br>
-    <img src = "./image/Inorder_traverse.png" width = "70%" height = "70%">  
+    <img src = "./image/Inorder_traverse.png" width = "70%" height = "70%"></br> 
         ```python
         def Inorder_traverse(T):
             if T:
@@ -41,7 +41,7 @@
                 Inorder_traverse(T.right)
         ```
     - 후위순회 *Postorder traversal*  LRV</br>
-    <img src = "./image/postorder_traverse.png" width = "70%" height = "70%">  
+    <img src = "./image/postorder_traverse.png" width = "70%" height = "70%"></br>
         ```python
         def postorder_traverse(T):
             if T:
@@ -49,7 +49,7 @@
                 postorder_traverse(T.right)
                 visit(T)
         ```
-        <img src="./image/traversal.png" width="300" height="200">
+        <img src="./image/traversal.png" width="300" height="200"></br>
 - 배열을 이용한 이진 트리의 표현</br>
     <p align="center">
     <img src="./image/bin_tree_map.png" align="center" width="67%">
@@ -58,9 +58,9 @@
     </p>
 
 - 부모 번호를 인덱스로 자식 번호를 저장</br>
-    <img src = "./image/bin_tree_index.png" width = "50%" height = "50%">
+    <img src = "./image/bin_tree_index.png" width = "50%" height = "50%"></br>
 - 자식 번호를 인덱스로 부모 번호를 저장</br>
-    <img src = "./image/bin_tree_ch_pa_idx.png" width = "50%" height = "50%">
+    <img src = "./image/bin_tree_ch_pa_idx.png" width = "50%" height = "50%"></br>
 - 루트 찾기, 조상 찾기
     ```python
     c = 5
