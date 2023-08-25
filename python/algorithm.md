@@ -431,3 +431,9 @@ def partition(a, begin, end):
     a[pivot], a[R] = a[R], a[pivot]
     return R 
 ```
+## 트리 응용
+### 수식 트리
+- 중위 순회 : A / B * C * D + E
+- 후위 순회 : A B / C * D * E +
+- 전위 순회 : + * * / A B C D E</br>
+<img src = "./image/image-3.png" width = "70%" height = "70%"></br>
