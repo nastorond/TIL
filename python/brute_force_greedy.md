@@ -34,7 +34,7 @@
 ### 완전 검색
 - 많은 종류의 문제들이 특정 조건을 만족하는 경우나 요소를 찾는 것
 - 이들은 전형적으로 순열(permutation), 조합(combination), 부분집합(subset) 과 같은 조합적 문제들(combiation problems)과 연관됨
-### 순열
+## 순열
 - 서로 다른 것들 중 몇 개를 뽑아서 한 줄로 나열하는것
 - 서로 다른 n 개 중 r 개를 택하는 순열은 *nPr* 로 표현
 - *nPr* = *n* x (*n* - 1) x (*n* - 2) x ... x (*n* - *r* + 1)
@@ -84,3 +84,104 @@ for i in range(1, (1<<n)- 1): # 공집합 제외
             group2.append(a[j])
     print(group1, group2)
 ```
+## 조합
+- 서로 다른 n 개의 원소 중 r 개를 순서 없이 골라낸 것을 조합 *combination* 이라고 부른다.
+    <sub>n</sub>C<sub>r</sub> = $n!\over (n-r)!r!$</br>
+    <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub></br></br>
+    <img src = "./image/combination_recursive.png" width = "70%" height = "70%"></br>
+```python
+# an : n 개의 원소를 가지고 있는 배열
+# tr : r 개의 크기의 배열, 조합이 임시 저장될 배열'
+# r 길이
+# n 개수
+def ncr(n, r):
+    if r == 0:
+        print(tr)
+    elif n < r:
+        return
+    else:
+        tr[r-1] = a[n-1]
+        ncr(n-1, r-1)
+        ncr(n-1, r)
+n = 5
+r = 3
+a = [1,2,3,4,5]
+tr = [0]*r
+ncr(n, r)
+```
+```python
+# n 개에서 r 개를 고르는 조합, s 선택할 수 있는 구간의 시작
+def nCr(n, r, s):
+    if r == 0:
+        print(comb)
+    else:
+        for i in range(s, n-r+1):
+            comb[r-1] = A[i]
+            nCr(n, r-1, i+1)
+A = [1,2,3,4,5,6]
+n = len(a)
+r = 2
+comb = [0]*r
+nCr(n, r, 0)
+```
+```python
+def subset(i, N, s, c):
+    if s== 0 and c!= 0:
+        return 1
+    elif i == N:
+        return 0
+    else:
+        if subset(i+1, N, s + arr[i], c + 1):
+            return 1
+        if subset(i+1, N, s, c):
+            return 1
+        return 0
+arr = [-1, 3, -9, 6, 7, -6, 1, 5, 4, -2]
+n = len(arr)
+subset(0, n)
+```
+```python
+def subset(i, N, s, c):
+    if i == N:
+        if s == 0: # 부분집합의 합이 0이 되는 경우
+            for j in range(N):
+                if bit[j]:
+                    print(arr[j], end = ' ')
+            print()
+
+    else:
+        subset(i+1, N, s + arr[i])
+        subset(i+1, N, s)
+    return
+arr = [-1, 3, -9, 6, 7, -6, 1, 5, 4, -2]
+n = len(arr)
+subset(0, n)
+```
+## 탐욕
+- 최적해를 구하는 데 사용되는 근시안적인 방법
+- 일번적으로, 머리속에 떠오르는 생각을 검증 없이 바로 구현하면 Greedy 접근이 된다.
+- 일단 한번 선택된 것은 번복하지 않는다. 이런 특성 때문에 대부분의 탐욕 알고리즘들은 단순하며, 제한적인 문제들에 적용된다.
+- 최적화 문제 optimization 란 가능한 해들 중에서 가장 좋은 최대 또는 최소 해를 찾는 문제이다.
+### 동작과정
+- 해 선택 : 현재 상태에서 부분 문제의 최적 해를 구한 뒤, 이를 부분해 집합 Solution Set에 추가한다.
+- 실행 가능성 검사 : 새로운 부분 해 집합이 실행가능한지를 확인한다. 문제의 제약 조건을 위반하지 않는 지를 검사한다.
+- 해 검사 : 새로운 부분 해 집합이 문제의 해가 되는지를 확인한다. 아직 전체 문제의 해가 완성되지 않았다면 1의 해 선택부터 다시 시작한다.
+### *Knapsack*
+- 배낭에 담을 수 있는 물건의 총 무게 W
+- n 개의 물건들이 있고 각 물건에는 무게와 값이 정해져 있음
+- 값이 최대가 되도록 무게를 초과하지 않게 물건을 담는 경우
+- S = {$item_1, item_2, item_3, item_4, ...$}
+- $w_i$ : $item_i$의 무게 $P_i = item_i$ 의 값
+- W : 배낭이 수용가능 한 총 무게</br>
+    <img src = "./image/knapsack.png" width = "70%" height = "70%"></br>
+### 회의실 배정하기
+- 회의는 시작시간과 종료시간이 있으며, 회의 시간이 겹치는 회의들은 동시에 열릴 수 없다.
+- 가능한 많은 회의가 열리기 휘한 회의 배정
+- input => 회의 개수, (시작시간, 종료시간)</br>
+    <img src = "./image/activity_selection.png" width = "70%" height = "70%"></br>
+- 공집합이 아닌 하위 문제 $S_{i,j}$ 가 있고 $S_{i,j}$ 에 속한 활동 $a_m$ 은 종료 시간이 가장 빠른 활동이다.
+- 하위문제 $S_{i,j}$에서 종료시간이 가장 빠른 활동 $a_m$ 을 선택한다.
+- $S_{i,m}$은 공집합 이므로, $a_m$을 선택하면 공집합이 아닌 하위문제 $S_{m,j}$가 남는다.
+- 위 두 과정 반복</br>
+    <img src = "./image/solution_activity_selection.png" width = "70%" height = "70%"></br>
+    <img src = "./image/solution_activity_selection_code.png" width = "70%" height = "70%"></br>
