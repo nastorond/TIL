@@ -85,7 +85,7 @@ for i in range(1, (1<<n)- 1): # 공집합 제외
     print(group1, group2)
 ```
 ## 조합
-- 서로 다른 n 개의 원소 중 r 개를 순서 없이 골라낸 것을 조합 *combination* 이라고 부른다.
+- 서로 다른 n 개의 원소 중 r 개를 순서 없이 골라낸 것을 조합 *combination* 이라고 부른다.</br>
     <sub>n</sub>C<sub>r</sub> = $n!\over (n-r)!r!$</br>
     <sub>n</sub>C<sub>r</sub> = <sub>n-1</sub>C<sub>r-1</sub> + <sub>n-1</sub>C<sub>r</sub></br></br>
     <img src = "./image/combination_recursive.png" width = "70%" height = "70%"></br>
@@ -185,7 +185,7 @@ subset(0, n)
 - 위 두 과정 반복</br></br>
     <img src = "./image/solution_activity_selection.png" width = "70%" height = "70%"></br>
     <img src = "./image/solution_activity_selection_code.png" width = "70%" height = "70%"></br>
-    
+
     ```python
     N = 10
     a = [1, 4, 1, 6, 6, 10, 5, 7, 3, 8, 5, 9, 3, 5, 8, 11, 2, 13, 12, 14]
