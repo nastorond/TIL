@@ -182,6 +182,56 @@ subset(0, n)
 - 공집합이 아닌 하위 문제 $S_{i,j}$ 가 있고 $S_{i,j}$ 에 속한 활동 $a_m$ 은 종료 시간이 가장 빠른 활동이다.
 - 하위문제 $S_{i,j}$에서 종료시간이 가장 빠른 활동 $a_m$ 을 선택한다.
 - $S_{i,m}$은 공집합 이므로, $a_m$을 선택하면 공집합이 아닌 하위문제 $S_{m,j}$가 남는다.
-- 위 두 과정 반복</br>
+- 위 두 과정 반복</br></br>
     <img src = "./image/solution_activity_selection.png" width = "70%" height = "70%"></br>
     <img src = "./image/solution_activity_selection_code.png" width = "70%" height = "70%"></br>
+    ```python
+    N = 10
+    a = [1, 4, 1, 6, 6, 10, 5, 7, 3, 8, 5, 9, 3, 5, 8, 11, 2, 13, 12, 14]
+
+    meet = []
+    for i in range(N):
+        meet.append([a[i*2], a[i*2 + 1]])
+    meet.sort(key=lambda x:x[1])
+
+    # 앞이 비어 있는 경우 추가
+    meet = [[0,0]] + meet
+
+    s = []
+    j = 0
+    for j in range(1, N+1):
+        if meet[i][0] >= meet[j][1]:
+            s.append(i)
+            j = 1
+    ```
+### 필수요소
+- 탐욕적 선택 속성 greedy  choice property
+    - 탐욕적 선택은 최적해로 갈 수 있음을 보여라
+    - 탐욕적 선택은 항상 안전하다.
+- 최적 부분 구조 optimal *substructure property*
+    - 최적화 문제를 정형화 하라
+    - 하나의 선택을 하면 풀어야 할 하나의 하위 문제가 남는다.
+- ***원 문제의 최적해 = 탐욕적 선택 + 하위 문제의 최적해*** 임을 증명해야한다
+### 탐욕 기법을 통한 Baby - gin 문제 해결
+```python
+i, inp, tri, run = 0, 0, 0, 0
+inp = input_numbers
+c[12] = 0
+while i < 6:
+    c[inp % 10] = c[inp % 10] + 1
+    inp = inp // 10
+    i += 1
+    
+while i < 10:
+    if c[i] >= 3:
+        c[i] = c[i] - 3
+        tri += 1
+        continue
+    if c[i] >= 1 and c[i+1] >= 1 and c[i+2] >= 1:
+        c[i] = c[i]-1
+        c[i+1] -= 1
+        c[i+2] -= 1
+        run += 1
+        continue
+    i += 1
+```
