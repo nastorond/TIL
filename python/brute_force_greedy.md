@@ -185,6 +185,7 @@ subset(0, n)
 - 위 두 과정 반복</br></br>
     <img src = "./image/solution_activity_selection.png" width = "70%" height = "70%"></br>
     <img src = "./image/solution_activity_selection_code.png" width = "70%" height = "70%"></br>
+    
     ```python
     N = 10
     a = [1, 4, 1, 6, 6, 10, 5, 7, 3, 8, 5, 9, 3, 5, 8, 11, 2, 13, 12, 14]
@@ -199,10 +200,10 @@ subset(0, n)
 
     s = []
     j = 0
-    for j in range(1, N+1):
+    for i in range(1, N+1):
         if meet[i][0] >= meet[j][1]:
             s.append(i)
-            j = 1
+            j = i
     ```
 ### 필수요소
 - 탐욕적 선택 속성 greedy  choice property
