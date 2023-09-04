@@ -11,22 +11,27 @@
       height: 200px;
       border: 2px solid black;
       padding-left: 2px;
-      text-align: center;
     }
 
 		/* 추가 css 코드 작성 1 */
-	.outer-box span{
+	  /* .outer-box > :not(.inner-box){
         color: red;
-    }
+        text-align: center;
+    } */
     
+    .outer-box > div:first-child {
+        color: red;
+        text-align: center;
+    }
+
     .inner-box {
       width : 200px;
       height: 100px;
 			/* 추가 css 코드 작성 2 */
-      border: 2px solid black;
-      color: black;
+      border: inherit;
       text-align: left;
     }
+
     .inner-box span{
         color: black;
     }
