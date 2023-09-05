@@ -98,6 +98,8 @@
 ### 궁금한거 생겼을 때
 how to rander image in html ***mdn***
 # CSS Layout
+- 각 요소의 위치와 크기를 조정하여 웹 페이지의 디자인을 결정하는 것
+- Display, Position, Float, Flexbox 등
 ## CSS Box Model
 - content, margin, padding, border 로 구성<br>
     <img src="./images/CSS_box.png" width="70%">
@@ -130,3 +132,81 @@ how to rander image in html ***mdn***
     - 요소가 줄 바꿈 되는 것을 원하지 않으면서 너비와 높이를 적용하고 싶은 경우에 사용
 - none
     - 요소를 화면에 표시하지않고, 공간조차 부여되지 않음
+## CSS Position
+- 요소를 Normal Flow에서 제거하여 다른 위치로 배치하는 것
+- 다른 요소 위에 올리기, 화면의 특정 위치에 고정시키기 등
+- 이동방향<br>
+    <img src="./images/position_move_dir.png" width="70%"><br>
+- static
+    - 기본값
+    - 요소를 Normal Flow 에 따라 배치
+- relative
+    - 요소를 Normal Flow 에 따라 배치
+    - 자기 자신을 기준으로 이동
+    - 요소가 차지하는 공간은 static 일 때와 같음
+- absolute
+    - 요소를 Normal Flow 에서 제거
+    - 가장 가까운 relative 부모 요소를 기준으로 이동
+    - 문서에서 요소가 차지하는 공간이 없어짐
+- fixed
+    - 요소를 Normal Flow 에서 제거
+    - 현재 화면영역 Viewport 을 기준으로 이동
+    - 문서에서 요소가 차지하는 공간이 없어짐
+- sticky
+    - 요소를 Normal Flow 에 따라 배치
+    - 요소가 일반적인 문서 흐름에 따라 배치되다가 스크롤이 특정 임계점에 도달하면 그 위치에 고정됨 fixed
+    - 만약 다음 sticky 요소가 나오면 다음 sticky 요소가 이전 sticky 요소의 자리를 대체
+        - 이전 sticky 요소가 고정되어 있던 위치와 다음 sticky 요소가 고정되어야 할 위치가 겹치게 되기 때문
+- z-index
+    - 정수 값을 사용해 Z축 순서를 지정
+    - 더 큰 값을 가진 요소가 작은 값의 요소를 덮음
+## CSS Layout Flexbox
+- 요소를 행과 열 형태로 배치하는 1차원 레이아웃 방식
+    - 공간 배열 & 정렬
+- Flexbox 기본 사항<br>
+    <img src="./images/flex_box_basic_thing.png" width="70%"><br>
+- main axis 주 축
+    - flex item 들이 배치되는 기본 축
+    - main start 에서 시작하여 main end 방향으로 배치
+- cross axis 교차 축
+    - main 축의 수직인 축
+### ***Flex Container***
+- display: flex; 혹은 display: inline-flex; 가 설정된 부모요소
+- 이 컨테이너의 1차 자식 요소들이 Flex Item이 됨
+- flexbox 속성 값들을 사용하여 자식 요소 Flex Item들을 배치<br>
+    <img src="./images/flex_container.png" width="70%"><br>
+1. flex Container 지정
+    - flex item 은 기본적으로 행으로 나열
+    - flex item 은 주축의 시작 선에서 시작
+    - flex item 은 교차축의 크기를 채우기 위해 늘어남
+2. flex-direction 지정
+    - flex item 이 나열되는 방향을 지정
+    - column 으로 지정할 경우 주 축이 변경 됨
+    - -reverse 로 지정하면 시작 선과 끝 선이 서로 바뀜
+3. flex-wrap
+    - flex item 목록이 flex container 의 하나의 행에 들어가지 않을 경우 다른 행에 배치할지 여부 설정
+4. justify-content
+    - 주 축을 따라 flex item 과 주위에 공간을 분배
+5. align-content
+    - 교차 축을 따라 flex item 과 주위에 공간을 분배
+        - flex-wrap 이 wrap 또는 wrap-reverse 로 설정된 여러 행에만 적용됨
+        - 한 줄 짜리 행에는 flex-wrap 이 nowrap 으로 설정된 경우 효과 없음
+6. align-items
+    - 교차 축을 따라 flex item 행을 정렬
+7. align-self
+    - 교차 축을 따라 개별 flex item 을 정렬
+- flex box 속성
+    - Flex Container
+        - display, flex-direction, flex-wrap, justify-content, align-items, align-content
+    - Flex Item 관련 속성
+        - align-self, flex-grow, flex-basis, order
+    - 배치 : flex-direction, flex-wrap
+    - 공간 분배 : justify-content, align-content
+    - 정렬 : align-items, align-self
+8. flex-grow
+    - 남는 행 여백을 비율에 따라 각 flex item 에 분배
+        - 아이템이 컨테이너 내에서 확장하는 비율을 지정
+    - flex-grow <-> flex-shrink
+9. flex-basis
+    - flex item 의 초기 크기 값을 지정
+    - flex-basis 와 width 값을 동시에 적용한 경우 flex-basis 가 우선
