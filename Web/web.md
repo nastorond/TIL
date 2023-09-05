@@ -98,8 +98,35 @@
 ### 궁금한거 생겼을 때
 how to rander image in html ***mdn***
 # CSS Layout
-### CSS Box Model
+## CSS Box Model
 - content, margin, padding, border 로 구성<br>
     <img src="./images/CSS_box.png" width="70%">
 - 명칭</br>
     <img src="./images/box_content_names.png" width="70%"></br>
+- width & height 속성
+    - 요소의 너비와 높이를 지정, 이때 지정되는 요소의 너비와 높이는 **콘텐츠 영역**을 대상으로 함
+## Box type
+### Block & Inline
+- display 속성에 각각 blsck inline 값을 가짐
+- Block
+    - 항상 새로운 행으로 나뉨
+    - width와 height 속성을 사용하여 너비와 높이를 지정할 수 있음
+    - 기본적으로 width 속성을 지정하지 않으면 박스는 inline 방향으로 사용가능한 공간을 모두 차지함 -> 너비를 사용가능한 공간의 100%로 채우는 것
+    - e.g. h1~6, p, div
+- Inline
+    - 새로운 행으로 나뉘지 않음
+    - width와 height 속성을 사용할 수 없음
+    - 수직 방향
+        - padding, margins, borders 가 적용되지만 다른요소를 밀어낼 수 없음
+    - 수평 방향
+        - padding, margins, borders 가 적용되어 다른 요소를 밀어낼 수 있음
+    - e.g. a, img, span<br>
+    <img src="./images/align_about_attr.png" width="70%">
+- inline-block
+    - inline과 block 요소 사이의 중간 지점을 제공하는 display 값
+    - block 요소의 특징을 가짐
+        - width height 속성 사용 가능
+        - padding, margin, border로 인해 다른요소가 밀려남
+    - 요소가 줄 바꿈 되는 것을 원하지 않으면서 너비와 높이를 적용하고 싶은 경우에 사용
+- none
+    - 요소를 화면에 표시하지않고, 공간조차 부여되지 않음
