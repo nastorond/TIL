@@ -5,17 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    /* h2, h3, h4 {
+      padding: 0;
+      margin: 0;
+    } */
     .container {
       border: 1px solid black;
       display:flex;
+      flex-basis: 200px 200px;
+      width: 80%;
+      flex-direction: column;
+      justify-content: center;
+      align-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .profile-comp-name {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    .profile-pic {
+      display: inline-block; 
+      width: 100px;
+      height: 100px;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div>
-      <img src="profile.jpg" alt="Profile Image">
+    <div class="profile-comp-name">
+      <img class="profile-pic" src="profile.jpg" alt="Profile Image">
       <h2>Company Name</h2>
     </div>
     <div>
@@ -28,7 +47,7 @@
         <p>Email</p>
       </div>
     </div>
-    <hr>
+    <hr />
     <div>
       <p>description</p>
     </div>
