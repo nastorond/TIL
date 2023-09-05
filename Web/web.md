@@ -97,3 +97,9 @@
 - 속성은 되도록 class 만 사용할 것
 ### 궁금한거 생겼을 때
 how to rander image in html ***mdn***
+# CSS Layout
+### CSS Box Model
+- content, margin, padding, border 로 구성<br>
+    <img src="./images/CSS_box.png" width="70%">
+- 명칭</br>
+    <img src="./images/box_content_names.png" width="70%"></br>
