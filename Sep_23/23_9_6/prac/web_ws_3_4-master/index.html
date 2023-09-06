@@ -8,9 +8,73 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <style>
+    .main {
+      position: relative;
+      background:url(./images/header.jpg);
+      background-size:cover;
+      background-position: center center;
+      width: 100%;
+      height: 1000px;
+    }
+    .btn-setting {
+      width: 100px;
+    }
+    .space {
+      margin: 0 2rem;
+    }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary sticky-top" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="./images/logo.png" alt="logo" width="100px" height="cover"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item space">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Community</a>
+          </li>
+          <li class="nav-item space">
+            <a class="nav-link active" href="#">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main d-flex justify-content-center flex-column align-items-center">
+    <p class="fw-bold text-center display-1 text-white">Cinema</p>
+    <p class="fw-bold text-center display-1 text-white">Community</p>
+    <button type="button" class="btn btn-primary btn-setting">
+      Let's Go</button>
+  </div>
+
+  <section class="d-flex flex-column justify-content-center align-items-center">
+    <div class="fs-1 mt-5 p-5">Used Skills</div>
+    <div class="d-flex flex-row">
+      <figure class="mx-5">
+        <img src="./images/web.png" alt="web" width="300px">
+        <figcaption class="text-center">Web</figcaption>
+      </figure>
+      <figure>
+        <img src="./images/html5.png" alt="html5" width="300px">
+        <figcaption class="text-center">HTML5</figcaption>
+      </figure>
+      <figure class="mx-5">
+        <img src="./images/css3.png" alt="css3" width="300px">
+        <figcaption class="text-center">CSS3</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="border bg-primary text-white text-center p-3">
+    HTML&CSS project. Created by 박수형
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
