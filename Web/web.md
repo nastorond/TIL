@@ -213,3 +213,40 @@ how to rander image in html ***mdn***
 # Bootstrap
 - CSS 프론트엔드 프레임워크 Toolkit
 - 미리 만들어진 다양한 디자인 요소들을 제공하여 웹사이트를 빠르고 쉽게 개발할 수 있도록 함
+## 기본 사용법
+- class mt-5 -> {property}{sides}-{size} margin top - 5
+- Bootstrap 에서 클래스 이름으로 Spacing 을 표현하는 방법<br>
+    <img src="./images/bootstrap_howtouse_ab_spacing.png" width="70%"><br>
+    - rem ==> root em 절대적인 값
+    - px pixel 은 절대적인 값은 아님 모니터에 따라 달라짐
+- Bootstrap 에는 특정한 규칙이 있는 클래스 이름으로 이미 스타일 및 레이아웃이 작성되어 있음
+### Typography
+- 실습 9/6 Lecture 01 ~
+### Component
+- Bootstrap 에서 제공하는 UI 관련 요소
+- 버튼, 네비게이션 바, 카드, 폼, 드롭다운 등
+# Semantic Web
+- 웹 데이터를 의미론적으로 구조화된 형태로 표현하는 방식
+## Semantic Web in HTML
+- 기본적인 모양과 기능 이외의 의미를 가지는 HTML 요소
+- 검색엔진 및 개발자가 웹 페이지 콘텐츠를 이해하기 쉽도록 함
+- 문서의 최상위 제목<br>
+    <img src="./images/semantic_web_heading.png" width="70%"><br>
+- semantic element
+    - header, nav, main, article, section, aside, footer -> 모두 div 로 표현할 수 있지만 이름에 의미 부여
+    - 직관적으로 구조화
+## Semantic in CSS
+### OCSS
+- Object Oriented CSS
+- 객체지향법
+- CSS를 효율적이고 유지 보수가 용이하게 작성하기 위한 일련의 가이드라인
+- 기본 원칙
+    - 구조와 스킨을 분리
+        - 구조와 스킨을 분리함으로써 재사용 가능성을 높임
+        - 모든 버튼의 공통 구조를 정의 + 각각의 스킨을 정의
+    - 컨테이너와 컨텐츠를 분리
+        - 객체에 직접 적용하는 대신 객체를 둘러싸는 컨테이너에 스타일을 적용
+        - 스타일을 정의할 때 위치에 의존적인 스타일을 사용하지 않도록 함
+        - 콘텐츠를 다른 컨테이너로 이동시키거나 재배치할 때 스타일이 깨지는 것을 방지<br>
+    <img src="./images/oocss_eg.png" width="70%"><br>
+    <img src="./images/oocss_eg2.png" width="70%"><br>
