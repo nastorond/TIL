@@ -210,3 +210,6 @@ how to rander image in html ***mdn***
 9. flex-basis
     - flex item 의 초기 크기 값을 지정
     - flex-basis 와 width 값을 동시에 적용한 경우 flex-basis 가 우선
+# Bootstrap
+- CSS 프론트엔드 프레임워크 Toolkit
+- 미리 만들어진 다양한 디자인 요소들을 제공하여 웹사이트를 빠르고 쉽게 개발할 수 있도록 함
