@@ -261,3 +261,17 @@ how to rander image in html ***mdn***
 - 산 넘어 산, 공식문서 넘어 공식문서
 - 공식문서를 잘 보는 것? 엄청난 개쩌는 능력
 - 엄청 친절함 한글 번역
+### 참고자료
+[Emmet Documentation](https://docs.emmet.io/cheat-sheet/)
+# Bootstrap Grid system
+- 웹 페이지의 레이아웃을 조정하는 데 사용되는 **12개의 컬럼**으로 구성된 시스템
+- 약수가 많기 때문에 12개로 설정
+### 목적
+- 반응형 디자인을 지원해 웹 페이지를 모바일, 태블릿, 데스크탑 등 다양한 기기에서 적절하게 표시할 수 있도록 도움
+## Grid system 클래스와 기본구조
+### 기본 요소
+- Container : Column 들을 담고 있는 공간
+- Column : 실제 컨텐츠를 포함하고 있는 부분
+- Gutter : 컬럼과 컬럼 사이의 영역
+- 1개의 row 안에 12칸의 column 영역이 구성. 각 요소는 12칸 중 몇 개를 차지할 것인지 지정됨
+- 
