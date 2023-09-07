@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>03_grid</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Bootstrap Grid System 3</h1>
+      </div>
+    </div>
+
+    <!-- 1. -->
+    <!-- 
+       1. Viewport 너비가 768px 미만인 경우 각 컬럼이 4 칸, 8 칸 차지한다
+       2. Viewport 너비가 768px 이상인 경우 각 컬럼이 4 칸, 4 칸을 양 끝에서 차지하며 
+          가운데 4 칸의 빈 공간이 있다
+     -->    
+    <div class="row">
+      <div class="item">
+        <p>item1</p>
+      </div>
+      <div class="item">
+        <p>item2</p>
+      </div>
+    </div>
+
+
+    <!-- 2. -->
+    <!-- 
+      1. Viewport 너비가 768px 미만인 경우 , 각 컬럼이 4 칸, 4 칸이 양 끝에서 차지하며 
+         가운데 4 칸의 빈 공간이 있다.
+      2. Viewport 너비가 992px 미만인 경우 4 칸의 빈 공간이 있고 뒤쪽에 각 컬럼이 4 칸, 4 칸 차지한다.
+      3. Viewport 너비가 992px 이상인 경우 앞에 7 칸의 빈 공간이 있고, 뒤에 5 칸의 컬럼이 있다. 
+         그 아래 줄에는 앞뒤 2 칸의 빈 공간이 있고 그 사이에 8 칸을 차지하는 컬럼이 있다
+     -->    
+    <div class="row">
+      <div class="item">
+        <p>item1</p>
+      </div>
+      <div class="item">
+        <p>item2</p>
+      </div>
+    </div>
+    
+
+    <!-- 3. -->
+    <div class="row">
+      <div class="item">
+        item1
+      </div>
+      <div class="item">
+        <div class="row">
+          <div class="item">item2</div>
+          <div class="item">item3</div>
+          <div class="item">item4</div>
+          <div class="item">item5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
