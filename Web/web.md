@@ -274,4 +274,23 @@ how to rander image in html ***mdn***
 - Column : 실제 컨텐츠를 포함하고 있는 부분
 - Gutter : 컬럼과 컬럼 사이의 영역
 - 1개의 row 안에 12칸의 column 영역이 구성. 각 요소는 12칸 중 몇 개를 차지할 것인지 지정됨
-- 
+- [실습 파일](https://github.com/nastorond/TIL/blob/master/Sep_23/23_9_7/Lecture/07-bootstrap-grid-system/01-grid-system.html)
+### Gutters
+- Grid system 에서 column 사이에 여백 영역. x 축은 padding, y 축은 margin 으로 여백 생성
+- x 축을 밀때 margin으로 밀면 행 자체의 크기가 커지기 때문에 padding 사용
+## Grid system for responsive web
+- 디바이스 종류나 화면 크기에 상관없이, 어디서든 일관된 레이아웃 및 사용자 경험을 제공하는 기술
+- Bootstrap grid system 에서는 12 개 column 과 6개 breakpoints 를 사용하여 반응형 웹 디자인 구현
+### Grid system Breakpoints
+- 웹 페이지를 다양한 화면 크기에서 적절하게 배치하기 위한 분기점
+- 화면 너비에 따라 6개의 분기점 제공(xs, sm, md, lg, xl, xxl)
+- 각 breakpoints 마다 설정된 최대 너비 값 **이상으로** 화면이 커지면 grid system 동작이 변경됨<br>
+    <img src="./images/breakpoints.png" width="70%"><br>
+- [실습 파일](https://github.com/nastorond/TIL/blob/master/Sep_23/23_9_7/Lecture/08-grid-system-for-responsive-web/01-breakpoints.html)
+### 참고
+- The Grid System
+    - CSS 가 아닌 편집 디자인에서 나온 개념으로 구성요소를 잘 배치해서 시각적으로 좋은 결과물을 만들기 위함
+    - 기본적으로 안쪽에 있는 요소들의 오와 열을 맞추는 것에서 기인
+    - 정보 구조와 배열을 체계적으로 작성하여 정보의 질서를 부여하는 시스템
+- Grid cards
+    - [실습 파일](https://github.com/nastorond/TIL/blob/master/Sep_23/23_9_7/Lecture/08-grid-system-for-responsive-web/02-grid-cards.html)
