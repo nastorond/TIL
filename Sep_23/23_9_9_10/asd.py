@@ -166,7 +166,7 @@ while True:
     elif target_x < whiteBall_x and target_y < whiteBall_y:
         radian = math.atan(width / height)
         angle = (180 / math.pi * radian) + 180
-    # 타겟구가 4사분면에 위치
+    # 타겟구가 2사분면에 위치
     elif target_x < whiteBall_x and target_y > whiteBall_y:
         radian = math.atan(height / width)
         angle = (180 / math.pi * radian) + 270
