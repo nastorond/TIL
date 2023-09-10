@@ -107,7 +107,6 @@ while True:
                 break
 
     # 타격포인트와 비교
-
     distance = math.sqrt((targetBall_x - whiteBall_x) ** 2 + (targetBall_y - whiteBall_y) ** 2)
     target_x = targetBall_x
     target_y = targetBall_y
