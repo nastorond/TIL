@@ -124,15 +124,19 @@ while True:
         hit_x = targetBall_x
         hit_y = targetBall_y
 
+        # 1사분면
         if targetBall_x > x and targetBall_y > y:
             hit_x += (r * math.sin(hole_radian))
             hit_y += (r * math.cos(hole_radian))
+        # 4사분면
         elif targetBall_x > x and targetBall_y < y:
             hit_x += (r * math.sin(hole_radian))
             hit_y -= (r * math.cos(hole_radian))
+        # 3사분면
         elif targetBall_x < x and targetBall_y < y:
             hit_x -= (r * math.sin(hole_radian))
             hit_y -= (r * math.cos(hole_radian))
+        # 2사분면
         elif targetBall_x < x and targetBall_y > y:
             hit_x -= (r * math.sin(hole_radian))
             hit_y += (r * math.cos(hole_radian))
