@@ -1,0 +1,11 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+  <h1>네이스</h1>
+  {% comment %} 어디로 보낼 것인가 {% endcomment %}
+  <form action="https://search.naver.com/search.naver" method="GET">
+    <label for="message">검색어: </label>
+    <input type="text" name="query" id="message">
+    <input type="submit">
+  </form>
+{% endblock content %}
