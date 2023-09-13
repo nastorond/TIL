@@ -2,9 +2,10 @@
 
 {% block content %}
   <h1>Throw</h1>
-  <form action="/catch/" method="GET">
+  <form action="{% url "ssafy" %}" method="GET">
     <label for="message">메시지: </label>
     <input type="text" name="message" id="message">
     <input type="submit">
   </form>
+  <a href="{% url "ssafy" %}">ssafy</a>
 {% endblock content %}
