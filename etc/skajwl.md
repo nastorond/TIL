@@ -62,3 +62,4 @@ spl4 = 'b' and 'i' # i
 - 초당 1e9의 연산 수행
 ### 참고자료
 - [python 메모리 관련](https://yomangstartup.tistory.com/105)
+- [안전한 패스워드 저장](https://d2.naver.com/helloworld/318732)
