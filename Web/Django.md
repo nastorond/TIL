@@ -190,3 +190,17 @@
 ### Automatic admin interface
 - Django는 추가 설치 및 설정 없이 자동으로 관리자 인터페이스를 제공
 - 데이터 확인 및 테스트 등을 진행하는데 매우 유용
+### 참고
+    ```
+    $ python manage.py sqlmigrate articles 0001
+    $ python manage.py showmigrations
+    ```
+- SQLite
+    - DB 관리 시스템 중 하나이며 Django의 기본 DB로 사용
+    - 파일로 존재하며 가볍고 호환성이 좋음
+- CRUD
+    - 소프트웨어가 가지는 기본적인 데이터 처리 기능
+    - Create    저장
+    - Read      조회
+    - Update    갱신
+    - Delete    삭제
