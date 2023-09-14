@@ -118,3 +118,75 @@
     - path_converter: variable_name
     - path converters
         - URL 변수 타입 지정
+# Django Model
+## Model
+- Model을 통한 DB 관리
+- DB의 테이블을 정의하고 데이터를 조작할 수 있는 기능들을 제공
+- 테이블 구조를 설계하는 blueprint
+### model 클래스 작성
+- e.g.
+    ```python
+    # articles/models.py
+
+    # models.Model -> 상속
+    # models라는 모듈의 Model 을 상속받음
+    class Article(models.Model):
+        # title 은 CharField 의 인스턴스
+        # Article 의 변수
+        title = models.CharField(max_length=10)
+        content = models.TextField()
+    ```
+    <img src='./images/model_class.png' width="70%">
+- django.db.models 모듈의 Model 이라는 부모 클래스를 상속받음
+- Model은 mode에 관련된 모든 코드가 이미 작성되어 있는 클래스
+- 개발자는 가장 중요한 테이블 구조를 어떻게 설계할지에 대한 코드만 작성하도록 하기 위한 것
+- 클래스 변수명
+    - 테이블의 각 필드(열) 이름
+- model Field 클래스
+    - 테이블 필드의 **데이터 타입**
+- model Field 클래스 키워드 인자(필드 옵션)
+    - 테이블 필드의 **제약조건** 관련 설정
+    - 제약조건
+        - 데이터가 올바르게 저장되고 관리되도록 하기 위한 규칙
+        - e.g. 숫자만 저장되도록, 문자가 100자까지만 저장되도록 하는 등
+### Migrations
+- model 클래스의 변경사항(필드 생성, 수정 삭제 등)을 DB에 최종 반영하는 방법</br>
+    <img src='./images/migration_process.png' width="70%"></br>
+    - 반드시 이 흐름대로 가야함
+- 핵심 명령어
+    ```
+    $ python manage.py makemigrations
+    $ python manage.py migrate
+    ```
+- 테이블에 필드 추가
+    ```python
+    # 필요한 필드 추가
+    class Article(models.Model):
+        title = models.CharField(max_length=10)
+        content = models.TextField()
+        created_at = models.DateTimeField(auto_now_add=True)
+        updated_at = models.DateTimeField(auto_now=True)
+    ```
+    - 명령어를 입력한뒤 기본값을 작성
+    - Djagno는 설계도를 쌓아가면서 추후 문제가 생겼을 시 복구하거나 되돌릴 수 있도록 함
+    - model class에 변경사항이 생겼다면, 반드시 새로운 설계도를 생성해야 하고, 이를 DB에 반영 해야한다.
+### model Field
+- DB 테이블의 필드(열)을 정의하며, 해당 필드에 저장되는 데이터 타입과 제약조건을 정의
+- CharField()
+    - 길이의 제한이 있는 문자열을 넣을 때 사용
+    - 필드의 최대 길이를 결정하는 max_legnth는 필수 인자
+- TextField()
+    - 글자의 수가 많을 때 사용
+    - 각 DB 서비스 마다, 운영체제 마다 글자 수의 최대가 다르기 때문에 제한을 따로 두진 않음
+- DateTimeField()
+    - 날짜와 시간을 넣을 때 사용
+    - ***auto_now***
+        - 데이터가 저장될 때마다 자동으로 현재 날짜, 시간을 저장
+        - 보통 수정일로 사용
+    - ***auto_now_add***
+        - 데이터가 처음 생성될 때만 자동으로 현재 날짜, 시간을 저장
+        - 보통 작성일로 사용
+## Admin site
+### Automatic admin interface
+- Django는 추가 설치 및 설정 없이 자동으로 관리자 인터페이스를 제공
+- 데이터 확인 및 테스트 등을 진행하는데 매우 유용
