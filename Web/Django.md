@@ -204,3 +204,58 @@
     - Read      조회
     - Update    갱신
     - Delete    삭제
+# ORM
+## ORM *Object-Relational-Mapping*
+- 객체 지향 프로그래밍 언어를 사용하여 호환되지 않는 유형의 시스템간에 데이터를 변환하는 기술
+- Django 와 DB 간 번역기 정도
+## QureySet API
+- ORM 에서 데이터를 검색, 필터링, 정렬 및 그룹화 하는데 사용하는 도구
+- API를 사용하여 SQL이 아닌 Python 코드로 데이터를 처리.</br>
+    <img src="./images/QuerySetApi.png" width="70%"></br>
+- 구문 구조
+    - Model class, Manager, Queryset API
+    ```python
+    # Modelclass.Manager.QuerysetAPI()
+    Article.objects.all()
+    ```
+- Query</br>
+    <img src="./images/Query.png" width="70%"></br>
+- QuerySet</br>
+    <img src="./images/QuerySet.png" width="70%"></br>
+- QuerySet 설치
+```
+$ pip install ipython
+$ pip install django-extensions
+```
+```python
+# settings.py
+
+INSTALLED_APPS = [
+    'normal apps ...',
+    'django_extensions',
+    'django apps ...',
+]
+```
+- Django shelll
+    - Djagno 환경 안에서 실행되는 python shell
+    - 입력하는 QuerySet API 구문이 Django 프로젝트에 영향을 미침
+- Create
+    - python manage.py shell_plus
+    - save() 객체를 DB에 저장하는 매서드
+- Read
+    - all() 전체 데이터 조회
+    - get() 단일 테이터 조회
+        - 객체를 찾을 수 없으면 DoesNotExist 예외를 발생시키고, 둘 이상의 객체를 찾으면 MultipleObjectsReturned 예외를 발생시킴
+        - primary key와 같이 고유성(uniqueness)을 보장하는 조회에서 사용 해야 함
+    - filter() 특정 조건 데이터 조회
+    - Field lookups
+        - 특정 레코드에 대한 조건을 설정하는 방법
+        - QureySet 메서드 filter(), exclude() 및 get()에 대한 키워드 인자로 지정됨
+        ```python
+        # 'content' 레코드에 'dja'가 포함된 모든 데이터 조회
+        Article.objects.filter(content__contains='dja')
+        ```
+- Update
+    - 인스턴스 변수를 변경 후 save 메서드 호출
+- Delete
+    - 삭제하려는 데이터 조회 후 delete 메서드 호출
