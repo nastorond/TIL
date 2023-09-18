@@ -137,3 +137,10 @@
             else:
                 return binSearch(a, mid + 1, high, key)
     ```
+- *Parametric Search*
+    - 특정 범위 검색
+    - lower bound
+    - upper bound
+    - e.g.
+        - 여러 개의 데이터 중 2가 처음 나온 시점
+        - 2 ~ 9 사이의 데이터는 몇개인가
