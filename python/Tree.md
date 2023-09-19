@@ -7,13 +7,15 @@
     - 단말 노드(리프 노드) : 차수가 0인 노드, 자식노드가 없는 노드
 ### 이진트리
 - 모든 노드들이 2개의 서브 트리를 갖는 형태의 트리
-- 레벨 i 에서의 노드의 최대 개수는 2**i 개
-- 높이가 h 인 이진 트리가 가질 수 있는 노드의 최소 개수는 h + 1개가 되며, 최대 개수는 2**(h + 1) - 1 개가 된다
+- 레벨 $i$ 에서의 노드의 최대 개수는 $2^i$ 개
+- 높이가 h 인 이진 트리가 가질 수 있는 노드의 최소 개수는 $h + 1$개가 되며, 최대 개수는 $2^{(h + 1)} - 1$ 개가 된다
 - 포화 이진 트리 *Full Binary Tree*
     - 모든 레벨의 노드가 포화상태로 차 있는 이진 트리
-    - 루트를 1번으로 하여 2**(h + 1) - 1 까지 정해진 위치에 대한 노드 번호를 가진다</br>
+    - 루트를 1번으로 하여 $2^{(h + 1)} - 1$ 까지 정해진 위치에 대한 노드 번호를 가진다</br>
     <img src = "./image/full_bin_tree.png" width = "70%" height = "70%"></br>
 - 완전 이진 트리 *Complete Binary Tree*
+    - 마지막 레벨을 제외한 모든 레벨은 꽉 차있어야 함
+    - 마지막 레벨 노드는 왼쪽부터 채운다
     - 높이가 h 이고 노드 수가 n 개일 때, 노드 번호 1번부터 n 번까지 빈자리가 없는 이진트리</br>
     <img src = "./image/comp_bin_tree.png" width = "70%" height = "70%"></br>
 - 평향 이진 트리 *Skewed Binary Tree*
@@ -41,7 +43,7 @@
                 Inorder_traverse(T.right)
         ```
     - 후위순회 *Postorder traversal*  LRV</br>
-    <img src = "./image/postorder_traverse.png" width = "70%" height = "70%"></br>
+        <img src = "./image/postorder_traverse.png" width = "70%" height = "70%"></br>
         ```python
         def postorder_traverse(T):
             if T:
@@ -75,13 +77,12 @@
 - key(왼쪽 서브트리) < key(루트노드) < key(오른쪽 서브트리)
 - 왼쪽 서브트리와 오른쪽 서브트리도 이진 탐색 트리이다.
 - 중위순회를 하면 오름차순으로 정렬된 값을 얻을 수 있음</br>
-<img src = "bin_search_tree.png" width = "70%" height = "70%"></br>
+    <img src = "./image/bin_search_tree.png" width = "70%" height = "70%"></br>
 - 탐색 연산
     - 루트에서 시작
     - 탐색할 키 값 x 를 루트 노드의 키 값과 비교한다.
     - x == root_node : 탐색연산 성공
     - x < root_node : 루트노드의 왼쪽 서브트리에서 탐색연산 수행
     - x > root_node : 루트노드의 오른쪽 서브트리에서 탐색연산 수행
-    - 서브트리에 대해서 순환적으로 탐색 연산 반복
-    <img src = "bin_search_tree.png" width = "70%" height = "70%"></br>
-    ![Alt text](image.png)
+    - 서브트리에 대해서 순환적으로 탐색 연산 반복</br>
+    <img src = "./image/searching_in_tree.png" width = "70%" height = "70%"></br>
