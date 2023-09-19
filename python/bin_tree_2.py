@@ -98,7 +98,7 @@ def preorder(nodeNumber):
     preorder(list_nodes[nodeNumber][0])
     # 중위
     # preorder(nodeNumber, end=' ')
-    preorder(list_nodes[nodeNumber][1])
+    preorder(list_nodes[nodeNumber][1]) 
     # 후위
     # preorder(nodeNumber, end=' ')
 
