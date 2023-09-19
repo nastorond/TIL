@@ -5,13 +5,16 @@ sys.stdin = open('input.txt')
 def find_ans(cnt, now_val):
     global res
 
+    #  확률은 곱할수록 작아지므로 지금값보다 작으면 더이상 확인하지 않는다.
     if res > now_val:
         return
-
+    
+    # 끝까지 도달하면 값 업데이트
     if sum(visited) == n:
         res = max(res, now_val)
         return
-
+    
+    # 경우의 수 나누기
     for i in range(n):
         if p[cnt][i]:
             if not visited[i]:
