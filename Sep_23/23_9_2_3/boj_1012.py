@@ -26,9 +26,9 @@ for _ in range(T):
     for _ in range(k):
         u, v = map(int, input().split())
         fld[u][v] = 1
-    res = 0
+    res1 = 0
     for i in range(n):
         for j in range(m):
             if fld[i][j]:
-                res += bfs(i, j)
-    print(res)
+                res1 += bfs(i, j)
+    print(res1)

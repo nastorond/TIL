@@ -54,8 +54,8 @@ for tc in range(1, T+1):
     # ans = 1e6
 
     # 함수 호출
-    res = find_minimum_cost(0, 0)
+    res1 = find_minimum_cost(0, 0)
 
     # 출력
     # print(f'#{tc} {ans}')
-    print(res)
+    print(res1)

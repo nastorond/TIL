@@ -3,7 +3,7 @@ sys.stdin = open('input.txt')
 
 
 def find_ans(cnt, now_val):
-    global res
+    global res1
 
     #  확률은 곱할수록 작아지므로 지금값보다 작으면 더이상 확인하지 않는다.
     if res > now_val:
@@ -28,6 +28,6 @@ for tc in range(1, T+1):
     n = int(input())
     p = [list(map(int, input().split())) for _ in range(n)]
     visited = [0] * n
-    res = -1
+    res1 = -1
     find_ans(0, 1)
-    print(f'#{tc} {res*100:6f}')
+    print(f'#{tc} {res1 * 100:6f}')

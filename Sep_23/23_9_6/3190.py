@@ -44,5 +44,5 @@ moving = {}
 for _ in range(turn):
     inp = input().rstrip().split()
     moving[int(inp[0])] = inp[1]
-res = game()
-print(res)
+res1 = game()
+print(res1)

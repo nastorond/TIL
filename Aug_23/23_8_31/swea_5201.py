@@ -17,15 +17,15 @@ for tc in range(1, T+1):
     limit.sort(reverse=True)
     
     # 결과값
-    res = 0
+    res1 = 0
 
     # 조건에 맞을때 트럭에 화물
     while freight and limit:
         if limit[0] >= freight[0]:
             limit.pop(0)
-            res += freight.pop(0)
+            res1 += freight.pop(0)
         else:
             freight.pop(0)
 
     # if tc == 1:
-    print(f'#{tc} {res}')
+    print(f'#{tc} {res1}')

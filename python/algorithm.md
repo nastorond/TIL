@@ -24,8 +24,8 @@
         if n == 0:
             return 1
         return n * fac(n - 1)
-    res = fac(5)
-    print(res) # 120
+    res1 = fac(5)
+    print(res1) # 120
     ``` 
 ## 문자열
 ### 패턴매칭
@@ -281,21 +281,21 @@ def deQueue():
     ```python
     # 백트레킹에 더 가까움
     n,m = map(int, input().split())
-    res = []
+    res1 = []
     vi = [0]*(n+1)
 
     def dfs():
-        if len(res) == m:
-            print(*res)
+        if len(res1) == m:
+            print(*res1)
             return 
 
         for i in range(1,n+1):
             if vi[i] == 0:
-                res.append(i)
+                res1.append(i)
                 vi[i] = 1
                 dfs()
                 vi[i] = 0
-                res.pop()
+                res1.pop()
     dfs()
     ## permutations와 동일하게 출력
     ```

@@ -23,9 +23,9 @@ n, m = map(int, input().split())
 fld = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] * m for _ in range(n)]
 
-res = 0
+res1 = 0
 for i in range(n):
     for j in range(m):
         if not visited[i][j] and fld[i][j]:
-            res += bfs(i, j)
-print(res)
+            res1 += bfs(i, j)
+print(res1)

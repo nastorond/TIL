@@ -64,22 +64,22 @@ li.pop(idx) # li[idx] pop
 - map 자체로써는 객체로 저장되어 실행되지 않고 list 등으로 동작을 유도해야 함
     ```python
     nums = [1,2,3]
-    res = map(str, nums)
-    print(res) # <map object at 0x0000020DE1B503D0>
-    print(list(res)) # ['1','2','3']
+    res1 = map(str, nums)
+    print(res1) # <map object at 0x0000020DE1B503D0>
+    print(list(res1)) # ['1','2','3']
 
-    res = []
+    res1 = []
     for num in nums:
-        res.append(str(num))
-    print(res) # ['1','2','3']
+        res1.append(str(num))
+    print(res1) # ['1','2','3']
     ```
     ```python
     def my_func(x):
         res = x*2
         return res
     nums = [1,2,3]
-    res = map(my_func, nums)
-    print(list(res))
+    res1 = map(my_func, nums)
+    print(list(res1))
     ```
     ```python
     import sys
@@ -109,15 +109,15 @@ li.pop(idx) # li[idx] pop
 - lambda 매개변수: 표현식
     ```python
     addition = lambda x, y: x + y
-    res = addition(3, 5)
-    print(res) # 8
+    res1 = addition(3, 5)
+    print(res1) # 8
     ## 근데 이럴거면 그냥 def 쓰는게 나음
     ```
 - map + lambda
     ```python
     nums = [1, 2, 3, 4, 5]
-    res = list(map(lambda x: x * 2, nums))
-    print(res) # [2, 4, 6, 8, 10]
+    res1 = list(map(lambda x: x * 2, nums))
+    print(res1) # [2, 4, 6, 8, 10]
     # lambda는 남발하지 말고 일회성으로만 사용할 때 사용
     ```
 
@@ -125,9 +125,9 @@ li.pop(idx) # li[idx] pop
 - 인덱스와 iterable의 요소들이 튜플형태로 return</br>
 
     ```python
-    res = ['a', 'b', 'c']
-    print(enumerate(res)) # <enumerate object at 0x000001AE1B4D06C0>
-    print(list(enumerate(res))) # [(0, 'a'), (1, 'b'), (2, 'c')]
+    res1 = ['a', 'b', 'c']
+    print(enumerate(res1)) # <enumerate object at 0x000001AE1B4D06C0>
+    print(list(enumerate(res1))) # [(0, 'a'), (1, 'b'), (2, 'c')]
     fruits = ['apple', 'banana', 'cherry']
     for idx, fruit in enumerate(fruits):
         print(f'인덱스 {idx}: {fruit}')

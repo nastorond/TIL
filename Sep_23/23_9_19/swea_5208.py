@@ -4,7 +4,7 @@ sys.stdin = open('input.txt')
 
 
 def find_ans(now, goal, battery, change_cnt):
-    global res
+    global res1
     
     # 현재 카운트가 현재 가진 최소값 보다 크면 더 볼필요 없음
     if res < change_cnt:
@@ -34,8 +34,8 @@ for tc in range(1, T+1):
     input_values = list(map(int, input().split()))
     num_stops = input_values[0]
     chargers = input_values[1:]
-    res = 1e9
+    res1 = 1e9
 
     find_ans(1, num_stops - 1, chargers[0] - 1, 0)
 
-    print(f'#{tc} {res}')
+    print(f'#{tc} {res1}')

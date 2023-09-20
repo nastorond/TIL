@@ -3,7 +3,7 @@ sys.stdin = open('input.txt')
 
 
 def find_ans(now, now_val):
-    global res
+    global res1
     # 유망성 확인
     if res < now_val:
         return
@@ -24,6 +24,6 @@ for tc in range(1, T+1):
     n = int(input())
     v = [list(map(int, input().split())) for _ in range(n)]
     visited = [0] * n
-    res = 1e9
+    res1 = 1e9
     find_ans(0, 0)
-    print(f'#{tc} {res}')
+    print(f'#{tc} {res1}')
