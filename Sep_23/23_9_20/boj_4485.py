@@ -23,14 +23,13 @@ def bfs():
             q.append([nx, ny])
 
 
-
 def dijkstra():
     q = []
     heapq.heappush(q, (fld[0][0], 0, 0))
     visited[0][0] = fld[0][0]
     while q:
         weight, x, y = heapq.heappop(q)
-        
+
         # 추가로 주어질 가중치가 이미 가중되어있는 가중치 보다 크면 추가 안함
         if visited[x][y] < weight:
             continue
@@ -56,10 +55,9 @@ while 1:
     dijkstra()
 
     res = visited[n-1][n-1]
-    
+
     if tc == 2:
         for i in visited:
             print(i)
 
     print(f'Problem {tc}: {res}')
-    
