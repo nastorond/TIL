@@ -1,6 +1,7 @@
 필기.md
 .idea
 *.txt
+.vscode
 input.txt
 bootstrap-5.3.1-dist
 .DS_Store
