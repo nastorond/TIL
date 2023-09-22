@@ -14,7 +14,7 @@ bool check[MAX];
 
 long long Prim() {
 	int cnt = 0;
-	long long tot = 0; // MST 
+	long long tot = 0; // MST
 
 	priority_queue<ti3, vector<ti3>, greater<ti3>>heap;
 	for (auto next : adj[1]) {

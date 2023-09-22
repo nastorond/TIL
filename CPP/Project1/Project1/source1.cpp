@@ -15,7 +15,7 @@ int findParent(int x) {
 	return parent[x] = findParent(parent[x]);
 }
 
-void unionParent(int a, int b) {
+void unionSet(int a, int b) {
 	a = findParent(a);
 	b = findParent(b);
 	parent[b] = a;
@@ -43,7 +43,7 @@ int kruskal_main(void) {
 
 		if (findParent(now) == findParent(next)) continue; // pass
 
-		unionParent(now, next);
+		unionSet(now, next);
 		ans += cost;
 
 		if (++cnt == V - 1) break;

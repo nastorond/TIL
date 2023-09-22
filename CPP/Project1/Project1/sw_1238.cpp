@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #define MAX 101
+
 using namespace std;
 
 vector<int> graph[MAX];
@@ -13,7 +14,6 @@ void init(){
 		depth[i] = 0;
 	}
 }
-
 void bfs(int start) {
 	queue<int> q;
 	q.push(start);
@@ -32,8 +32,6 @@ void bfs(int start) {
 	}
 }
 int main(int argc, char** argv) {
-	// freopen("input.txt", "r", stdin);
-
 	int T = 10;
 	for (int tc = 1; tc <= T; ++tc) {
 		int e, start;
