@@ -41,7 +41,7 @@ int main(void) {
 		int now = curEdge.second.first;
 		int next = curEdge.second.second;
 
-		if (findParent(now) == findParent(next)) continue; // 사이클이면 pass
+		if (findParent(now) == findParent(next)) continue; // pass
 
 		unionParent(now, next);
 		ans += cost;
