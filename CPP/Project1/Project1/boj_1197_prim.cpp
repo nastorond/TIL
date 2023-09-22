@@ -41,7 +41,7 @@ long long Prim() {
 	return tot;
 }
 
-int main() {
+int prim_main() {
 	cin >> v >> e;
 	for (int i = 0; i < e; i++) {
 		int from, to, cost;

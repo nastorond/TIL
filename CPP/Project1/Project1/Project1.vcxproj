@@ -145,6 +145,10 @@
   <ItemGroup>
     <ClCompile Include="boj_1197_prim.cpp" />
     <ClCompile Include="source1.cpp" />
+    <ClCompile Include="sw_1238.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

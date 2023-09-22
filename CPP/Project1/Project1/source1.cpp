@@ -21,7 +21,7 @@ void unionParent(int a, int b) {
 	parent[b] = a;
 }
 
-int main(void) {
+int kruskal_main(void) {
 	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	cin >> V >> E;
