@@ -50,7 +50,7 @@ int main(){
                 arr[i].push_back(t);
             }
         }
-        vector<int> visited[n];
+        // vector<int> visited[n];
         // find_ans(visited, 0, 0, arr);
     }
 }
