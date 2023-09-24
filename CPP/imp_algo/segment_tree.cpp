@@ -38,7 +38,7 @@ int sumTree(vector <long long> &segTree, int node, int left, int right, int star
     if (left <= start && end <= right) return segTree[node];
 
     if (right < start || end < left) return 0;
-
+ 
     int mid = (start + end) / 2;
     return sumTree(segTree,node*2, left, right, start, mid) + sumTree(segTree,node*2+1, left, right, mid+1, end);
 }

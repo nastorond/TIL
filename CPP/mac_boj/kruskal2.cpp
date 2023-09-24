@@ -36,9 +36,7 @@ int main(){
         v.push_back({c, {a, b}});
     }
     sort(v.begin(), v.end());
-    for(int i=1; i<=V; i++){
-        parents[i] = i;
-    }
+    for(int i=1; i<=V; i++) parents[i] = i;
 
     int cnt = 0;
     int last = 0;
