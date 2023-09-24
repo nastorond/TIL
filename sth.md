@@ -2,4 +2,4 @@
 `전소현, 이채은, 박수형, 주준형, 이민지`
 | 시작일 | 문제 | Online Judge | 레벨 | 기출 | 완료 |
 | :--: | :--: | :--: | :--: | :--: | :--: |
-|23.08.06.| `신고 결과 받기` | `Programmers` | `Lv. 1`| `2022 KAKAO BLIND RECRUITMENT` | `소현` `수형` `채은`|
+|[23.08.06]()| [`신고 결과 받기`](https://school.programmers.co.kr/learn/courses/30/lessons/92334) | `Programmers` | `Lv. 1`| `2022 KAKAO BLIND RECRUITMENT` | `소현` `수형` `채은`|
