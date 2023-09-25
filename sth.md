@@ -12,6 +12,11 @@
 | 23.08.20. | [`N-Queen`](https://school.programmers.co.kr/learn/courses/30/lessons/12952) | `Programmers` | `Lv. 2` | `백트래킹(Backtracking)` | [`소현`](https://www.notion.so/N-Queen-ab9bf45760624367b55bbf5aec01aab9) [`수형`](https://www.notion.so/N-Queen-ee980ab47d2c4ac4ad18d1e8cb9e7b0f)|
 | 23.08.23. | [`타겟 넘버`](https://school.programmers.co.kr/learn/courses/30/lessons/12952) | `Programmers` | `Lv. 2` | `깊이/너비 우선 탐색(DFS/BFS)` | [`수형`](https://www.notion.so/82401ec8d8e74c79a32461b4e7c41697) [`소현`](https://www.notion.so/efd7aaf97661463d826c41d1c97b452c)|
 | 23.08.27. | [`N으로 표현`](https://school.programmers.co.kr/learn/courses/30/lessons/42895) | `Programmers` | `Lv. 3` | `동적계획법(DP)` | |
-| 23.08.27. | [`정수`](https://www.acmicpc.net/problem/1040) | `BaekJoon` | `Platinum II` | `동적계획법(DP)` `비트마스킹` `탐욕법(Greedy)` | |
-| 23.08.30. | [`게리멘더링`](https://www.acmicpc.net/problem/17471) | `BaekJoon` | `Gold IV` | `브루트포스(Brute Force)` `깊이/너비 우선 탐색(DFS/BFS)` `그래프 이론` | |
+| 23.08.27. | [`정수`](https://www.acmicpc.net/problem/1040) | `BaekJoon` | `Platinum II` | `동적계획법(DP)` `비트마스킹`<br> `탐욕법(Greedy)` | |
+| 23.08.30. | [`게리멘더링`](https://www.acmicpc.net/problem/17471) | `BaekJoon` | `Gold IV` | `브루트포스(Brute Force)`<br> `깊이/너비 우선 탐색(DFS/BFS)` `그래프 이론` | |
 | 23.09.03. | [`도시 분할 계획`](https://www.acmicpc.net/problem/1647) | `BaekJoon` | `Gold IV` | `그래프 이론` `최소 신장 트리(MST)` | [`채은`](https://www.notion.so/dd88b7853f43463fbdfe1592d903a6f5) [`수형`](https://www.notion.so/23-09-03-91ddf661d04d46748821414f1770af5f) |
+| 23.09.06. | [`큰 수 만들기`](https://school.programmers.co.kr/learn/courses/30/lessons/42883) | `Programmers` | `Lv. 2` | `탐욕법(Greedy)` | [`민지`](https://www.notion.so/6dbedea9567a4515ac45876524d62d65) |
+| 23.09.10. | [`오픈 채팅방`](https://school.programmers.co.kr/learn/courses/30/lessons/42888) | `Programmers` | `Lv. 2` | `2019 KAKAO BLIND RECRUITMENT` | [`소현`](https://www.notion.so/efb8776d280244b697ceb12e907cbe8f) |
+| 23.09.17. | [`행렬 제곱`](https://www.acmicpc.net/problem/10830) | `BaekJoon` | `Gold IV` | `수학` `분할 정복 (Divide & Qonquer)` | [`채은`](https://www.notion.so/cefcbe23bccc4972bba1e4a7f94b3f0d) |
+| 23.09.20. | [`피보나치 수 6`](https://www.acmicpc.net/problem/11444) | `BaekJoon` | `Gold II` | `수학` `분할 정복 (Divide & Qonquer)` | [`채은`](https://www.notion.so/6-4d285cffffd44d40be5a5d025614195d) [`수형`](https://www.notion.so/6-b5e2f4e264dc45d199a05fc0395bc5af) |
+| 23.09.24. | [`테트로미노`](https://www.acmicpc.net/problem/14500) | `BaekJoon` | `Gold IV` | `구현` `브루트포스(Brute Force)` | [`채은`](https://www.notion.so/cc2a4d88c72648dbb2b80e091289d970) |
