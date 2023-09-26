@@ -295,3 +295,51 @@ INSTALLED_APPS = [
     - 클라이언트가 인자에 작성된 주소로 다시 요청을 보내도록 하는 함수
 ## Update
 - Update 로직을 구현하기 위해 필요한 view 함수 개수는 2개
+# Form
+## 개요
+### HTML 'form'
+- 지금까지 사용자로부터 데이터를 받기위해 활용한 방법 그러나 비정상적 혹은 악의적인 요청을 필터링 할 수 없음
+- 유효한 데이터인지 확인이 필요
+### 유효성 검사
+- 수집한 데이터가 정확하고 유효한지 확인하는 과정
+- 구현
+    - 입력값, 형식, 중복, 범위, 보안 등 많은 것들을 고려해야함
+    - Django가 제공하는 Form 사용
+## Django Form
+- 사용자 입력 데이터를 수집, 처리 및 유효성 검사를 수행하기 위한 도구
+- 유효성 검사를 단순화하고 자동화 할 수 있는 기능을 제공
+- class
+```python
+# articles/forms.py
+from django import forms
+class ArticleForm(forms.Form):
+    title = forms.CharField(max_length=10)
+    content = forms.CharField()
+```
+## Widgets
+- HTML 'input' element의 표현을 담당
+## Django ModelForm
+- form
+    - 사용자 입력 데이터를 DB에 저장하지 않을 때 사용
+    - e.g. 로그인
+- ModelForm
+    - 사용자 입력 데이터를 DB에 저장해야 할 때 사용
+    - e.g. 게시글, 회원가입
+### ModelForm
+- Model 과 연결된 Form을 자동으로 생성해주는 기능
+- Model + Form
+- Meta class
+    - ModelForm의 정보를 저장하는 곳
+- is_valid()
+    - 여러 유효성 검사를 실행하고, 데이터가 유효한지 여부를 Boolean 으로 변환
+- 공백 데이터가 유효하지 않은 이유와 에러메시지가 출력되는 과정
+    - 별도로 명시하지 않았지만 모델 필드에는 기본적으로 빈 값은 허용하지 않는 제약조건이 설정되어 있음
+    - 빈 값은 is_valid()에 의해 False로 평가되고 form 객체에는 그에 맞는 에러 메시지가 포함되어 다음 코드로 진행됨
+- save() 메서드가 생성과 수정을 구분하는 법
+    - 키워드 인자 instance 여부를 통해 생성할 지, 수정할 지를 결정
+### Djnago Form 정리
+- 사용자로부터 데이터를 수집하고 처리하기 위한 강력하고 유연한 도구
+- HTML form 의 생성, 데이터 유효성 검사 및 처리를 쉽게 할 수 있도록 도움
+- new & create view 함수간 공통점과 차이점
+    - 공통점 : 데이터 생성을 구현하기 위함
+    - 차이점 : new 는 GET method 요청만을, create 는 POST method 요청만을 처리
