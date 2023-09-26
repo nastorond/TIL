@@ -3,33 +3,66 @@
 using namespace std;
 
 int house[16][16];
-int res = 0;
+int n;
 
-void dfs(int i, int j, int x, int y, int n, bool flg){
-    if(x==n-1 && y==n-1){
-        res++;
-        return ;
+int dfs(int y, int x, int j, int i){
+    if(x == n-1 && y==n-1) return 1;
+
+    int res = 0;
+
+    if (y == j && x-1 == i){
+        if (x+1 < n && house[y][x+1] != 1){
+            res += dfs(y, x+1, y, x);
+        }
+        if (y+1 < n && x+1 < n){
+            if(house[y][x+1] != 1 && house[y+1][x+1] != 1 && house[y+1][x] != 1){
+                res += dfs(y+1, x+1, y, x);
+            }
+       }
     }
-    if(i >= n || j >= n || x >= n || y >= n) return ;
-    if(house[i][j] == 1 || house[x][y]) return ;
-    if(flg == true){
-        if (house[x-1][y] == 1 || house[x][y-1] == 1) return ;
+
+    if (y == j+1 && x==i){
+        if(y+1<n && house[y+1][x] != 1){
+            res += dfs(y+1, x, y, x);
+        }
+
+        if(y+1<n && x+1<n){
+            if(house[y+1][x] != 1 && house[y+1][x+1] != 1 && house[y][x+1] !=1){
+                res += dfs(y+1, x+1, y, x);
+            }
+        }
     }
+
+    if (y==j+1 && x==i+1){
+        if (x+1 < n && house[y][x+1] != 1){
+            res += dfs(y, x+1, y, x);
+        }
+        if(y+1<n && house[y+1][x] != 1){
+            res += dfs(y+1, x, y, x);
+        }
+        if(y+1<n && x+1<n){
+            if(house[y+1][x] != 1 && house[y+1][x+1] != 1 && house[y][x+1] !=1){
+                res += dfs(y+1, x+1, y, x);
+            }
+        }
+    }
+    return res;
 }
 
 int main(){
     ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    int n;
     cin >> n;
-
+    
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
             cin >> house[i][j];
         }
     }
 
-    dfs(0, 0, 0, 1, n, false);
+    int res;
+
+    res = dfs(0, 1, 0, 0);
 
     cout << res << "\n";
 }
