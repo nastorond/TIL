@@ -343,3 +343,76 @@ class ArticleForm(forms.Form):
 - new & create view 함수간 공통점과 차이점
     - 공통점 : 데이터 생성을 구현하기 위함
     - 차이점 : new 는 GET method 요청만을, create 는 POST method 요청만을 처리
+# Static filse
+### static filse
+- 서버측에서 변경되지 않고 고정적으로 제공되는 파일
+- 이미지 js css 등
+## 웹 서버와 정적 파일
+- 웹 서버의 기본동작은 특정 위치 URL에 있는 자원을 요청 HTTP request 받아서 응답 HTTP response 을 처리하고 제공 serving 하는 것
+- 이는 "자원에 접근 가능한 주소가 있다"라는 의미
+- 웹서버는 요청받은 URL로 서버에 존재하는 정적 자원을 제공
+- 정적 파일을 제공하기 위한 경로 URL 가 있어야 함
+## Static Files 제공하기
+- 기본 경로에서 제공
+    - 기본경로 : app folder/static/app_name/
+- 추가 경로에서 제공
+### STATIC_URL
+- 기본 경로 및 추가 경로에 위치한 정적 파일을 참고하기 위한 URL 
+- 실제 파일이나 디렉토리가 아니며, URL로만 존재
+- 추가 경로 생성
+    - STATICFILES_DIRS에 문자열 값으로 추가 경로 설정
+## Media Files
+- 사용자가 웹에서 업로드하는 정적 파일 user-uploaded
+## 이미지 업로드
+- ImageField()
+    - 이미지 업로드에 사용하는 모델 필드
+    - 이미지 객체가 직접 저장되는 것이 아닌 **이미지 파일의 경로**가 문자열로 DB에 저장
+- 미디어 파일을 제공하기 전 준비
+    - settings.py 에 MEDIA_ROOT, MEDIA_URL 설정
+    - 작성한 MEDIA_ROOT와 MEDIA_URL에 대한 url 지정
+- MEDIA_ROOT
+    - 미디어 파일들이 위치하는 디렉토리의 절대 경로
+    ```python
+    # settings.py
+    MEDIA_ROOT = BASE_DIR / 'media'
+    ```
+- MEDIA_URL
+    - MEDIA_ROOT에서 제공되는 미디어 파일에 대한 주소를 생성
+    - STATIC_URL과 동일한 역할
+    ```python
+    # settings.py
+    MEDIA_URL = 'media/'
+    ```
+- MEDIA_ROOT와 MEDIA_URL에 대한 url 지정
+    - 업로드 된 파일의 URL == settings.MEDIA_URL
+    - 위 URL을 통해 참조하는 파일의 실제 위치 == settings.MEDIA_ROOT<br>
+    <img src="./images/static_url_settings.png" width="70%"><br>
+### 이미지 업로드
+- blank = True 속성을 작성해 빈 문자열이 저장될 수 있도록 제약 조건 설정
+    - 이미지 업로드를 선택사항으로 만들기 위함<br>
+    <img src="./images/upload_img1.png" width="70%"><br>
+- migration 진행
+    - pip install Pillow
+    - Pillow : 파이썬 상에서 이미지 처리를 위한 라이브러리
+- form 요소의 enctype 속성 추가<br>
+    <img src="./images/upload_img2.png" width="70%"><br>
+- view 함수에서 업로드 파일에 대한 추가 코드 작성<br>
+    <img src="./images/upload_img3.png" width="70%"><br>
+### 업로드 이미지 제공
+- 'url'속성을 통해 업로드 파일의 경로 값을 얻을 수 있음
+    - content_name.image.url : 업로드 파일의 경로
+    - content_name.image : 업로드 파일의 파일 이름
+- 이미지를 업로드하지 않은 게시물은 detail 템플릿을 렌더링 할 수 없음
+    - 이미지 데이터가 있는 경우만 이미지를 출력할 수 있도록 처리<br>
+    <img src="./images/upload_img_offer.png" width="70%"><br>
+### 업로드 이미지 수정
+- 수정 페이지 form 요소에 eenctype 속성 추가<br>
+    <img src="./images/uploaded_img_fix.png" width="70%"><br>
+- update view 함수에서 업로드 파일에 대한 추가 코드 작성<br>
+    <img src="./images/uploaded_img_fix2.png" width="70%"><br>
+### 참고
+- 'upload_to' argument
+    - ImageField()의 upload_to 인자를 사용해 미디어 파일 추가 경로 설정<br>
+        <img src="./images/upload_set_img.png" width="70%"><br>
+- request.FILES 가 두번째 위치 인자인 경우
+    - ModelForm 상위 클래스 BaseModelForm의 생성자 함수 키워드 인자
