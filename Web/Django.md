@@ -9,8 +9,8 @@
 - 웹 사용자의 인터넷이 연결된 장치, 웹 브라우저 등
 ### Server
 - 클라이언트의 요청에 응답하는 주체
-- 웹 페이지, 앱을 저장하는 컴퓨터
-    <img src="./images/response_flowchart.png" width="70%">
+- 웹 페이지, 앱을 저장하는 컴퓨터<br>
+    <img src="./images/response_flowchart.png" width="70%"><br>
 ## 프로젝트 및 가상환경
 ### 가상환경
 - Python 애플리케이션과 그에 따른 패키지들을 격리하여 관리할 수 있는 **독립적인** 실행 환경
@@ -191,10 +191,10 @@
 - Django는 추가 설치 및 설정 없이 자동으로 관리자 인터페이스를 제공
 - 데이터 확인 및 테스트 등을 진행하는데 매우 유용
 ### 참고
-    ```
-    $ python manage.py sqlmigrate articles 0001
-    $ python manage.py showmigrations
-    ```
+```
+$ python manage.py sqlmigrate articles 0001
+$ python manage.py showmigrations
+```
 - SQLite
     - DB 관리 시스템 중 하나이며 Django의 기본 DB로 사용
     - 파일로 존재하며 가볍고 호환성이 좋음
@@ -263,10 +263,10 @@ INSTALLED_APPS = [
 - HTTP request methods
     - 데이터(리소스)에 어떤 요청(행동)을 원하는지를 나타내는 것
     - **GET** & **POST**
-## 'GET' Method
+## ***GET*** Method
 - 특정 리소스를 조회하는 요청
 - GET으로 데이터를 전달하면 Query String 형식으로 보내짐
-## 'POST' Method
+## ***POST*** Method
 - 특정 리소스에 변경(생성, 수정, 삭제)을 요구하는 요청
 - POST로 데이터를 전달하면 HTTP Body에 담겨 보내짐
 ## HTTP response status code
