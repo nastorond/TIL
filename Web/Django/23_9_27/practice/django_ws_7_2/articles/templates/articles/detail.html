@@ -6,7 +6,7 @@
   <hr>
     <p>제목 : {{ article.title }}</p>
     {% if article.image %}
-    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+    <img src="{{ article.image.url }}" alt="{{ article.image }}" width="40%">
     {% endif %}
     <p>내용 : {{ article.content }}</p>
     <p>만든시간 : {{ article.created_at }}</p>
