@@ -77,6 +77,8 @@ int main(){
     root = InsertNode(root, 7);
     root = InsertNode(root, 8);
 
+    cout << root << "\n";
+
     preorder(root);
     cout << "\n";
     inorder(root);

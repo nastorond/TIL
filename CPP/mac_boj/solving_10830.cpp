@@ -27,3 +27,8 @@ Matrix2x2 Matrix_Power(Matrix2x2 A, int n){
     }
     return A;
 }
+
+int main(){
+    
+    return 0;
+}
