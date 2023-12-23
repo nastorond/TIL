@@ -55,6 +55,22 @@
     <br><t>&rarr; View(클라이언트)와 통신하는 DTO 클래스, ResponseDTO, RequestDTO는 요구사항에 따라 자주 변경됨. 어떤 요청에는 특정값이 추가될 수도 있고, 특정값이 없을수도 있음. 따라서 Entity 클래스와 분리하여 관리해야함.
 - 도메인 모델링을 지키기 위함.
     <br><t>도메인 설계를 잘했다고 하더라도 원하는 데이터를 표시하기가 쉽지 않을 수 있음. 예를 들어 Entity 클래스의 특정 컬럼들을 조합하여 특정 포맷을 출력하고 싶을 때, Entity클래스에 표현을 위한 필드나 로직이 추가되면 객체 설계를 망가뜨릴 수 있음. 따라서 DTO에 표현을 위한 로직을 추가해서 사용하는 것이 Entity의 도메인 모델링을 지킬 수 있음.
+## DAO(Data Access Object)
+- 실제로 DB에 접근하는 객체.
+- Service와 실제 DB 연결하는 역할을 담당. &rarr; DB에서 데이터를 꺼내오거나 넣는 역할.
+- JPA의 경우 Repository가 DAO의 역할을 함. 그렇다고 해서 DAO와 Repository가 같은 것은 아니다.
+    ```
+    DAO와 REPOSITORY 모두 퍼시스턴스 로직에 대한 객체-지향적인 인터페이스를 제공하고 도메인 로직과 퍼시스턴스 로직을 분리하여 관심의 분리(separation of concerns) 원리를 만족시키는데 목적이 있다. 그러나 비록 의도와 인터페이스의 메서드 시그니처에 유사성이 존재한다고 해서 DAO와 REPOSITORY를 동일한 패턴으로 취급하는 것은 성급한 일반화의 오류를 범하는 것이다.
+    DAO는 퍼시스턴스 로직인 Entity Bean을 대체하기 위해 만들어진 개념이다. DAO가 비록 객체-지향적인 인터페이스를 제공하려는 의도를 가지고 있다고 하더라도 실제 개발 시에는 하부의 퍼시스턴스 메커니즘이 데이터베이스라는 사실을 숨기려고 하지 않는다. DAO의 인터페이스는 데이터베이스의 CRUD 쿼리와 1:1 매칭 되는 세밀한 단위의 오퍼레이션을 제공한다. 반면 REPOSITORY는 메모리에 로드된 객체 컬렉션에 대한 집합 처리를 위한 인터페이스를 제공한다. DAO가 제공하는 오퍼레이션이 REPOSITORY 가 제공하는 오퍼레이션보다 더 세밀하며, 결과적으로 REPOSITORY에서 제공하는 하나의 오퍼레이션이 DAO의 여러 오퍼레이션에 매핑되는 것이 일반적이다. 따라서 하나의 REPOSITORY 내부에서 다수의 DAO를 호출하는 방식으로 REPOSITORY를 구현할 수 있다.
+    ```
+## Controller
+- Controller 는 Client의 요청을 DTO의 형태로 받아 Service의 기능을 호출하고, 적절한 응답을 DTO의 형태로 반환하는 역할을 함.
+- 요청과 응답을 관리하는 계층.
+## Service
+- Service 계층은 DTO를 통해 받은 데이터를 이용해 비즈니스 로직을 처리하고, DAO(혹은 Repository)를 통해 DB에 접근하여 데이터를 관리함.
+## Repository(DAO)
+- JPA를 사용하면 Repository를 통해 DB에 실제로 접근할 수 있음.
+- Service 와 DB를 연결해주는 역할을 하며, Service 계층에서 Repository를 이용하여 데이터를 관리할 수 있음.
 #### 출처
 - [지수의 콘텐츠 기록장](https://jisooo.tistory.com/entry/Spring-%EB%B9%8C%EB%93%9C-%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC-Maven%EA%B3%BC-Gradle-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0)
 - [[Spring]Gradle vs Maven written by YuKeon](https://medium.com/@yukeon97/spring-gradle-vs-maven-81b58ea3c96c)
