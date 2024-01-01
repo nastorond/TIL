@@ -4,6 +4,11 @@
 #include <tuple>
 #define INF 1e9
 
+/*
+벽을 뚫는 다는 것을 가중치로 계산 할 수 있음
+따라서 다익스트라로 최소거리 가능
+*/
+
 using namespace std;
 
 int n, m;
