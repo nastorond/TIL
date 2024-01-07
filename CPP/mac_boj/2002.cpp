@@ -10,6 +10,7 @@ int main () {
 
     string tmp;
     unordered_map<string, int> inp_car;
+    string out_car[MAX_VAL];
     int n, ck_gap;
     int gaps[MAX_VAL];
     bool flg = false;
@@ -23,18 +24,19 @@ int main () {
     }
     for (int i=0; i<n; i++) {
         cin >> tmp;
-        gaps[i] = inp_car[tmp] - i;
-        // if (i < inp_car[tmp]) {
-        //     res++;
-        // }
+        out_car[i] = tmp;
     }
 
-    ck_gap = 1e9;
-    for (int i=1; i<n; i++) {
-        ck_gap = min(gaps[i], ck_gap);
+    for (int i=0; i<n; i++) {
+        for (int j=i+1; j<n; j++) {
+            if (inp_car[out_car[i]] > inp_car[out_car[j]]) {
+                res++;
+                break;
+            }
+        }
     }
 
-    cout << -ck_gap << "\n";
+    cout << res << "\n";
 
     return 0;
 }
