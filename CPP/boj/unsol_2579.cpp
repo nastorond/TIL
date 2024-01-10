@@ -19,6 +19,7 @@ int main () {
 
     cin >> n;
     stairs[0] = 0;
+    dp[0] = 0;
     for (int i=1; i<=n; i++) {
         cin >> stairs[i];
     }
