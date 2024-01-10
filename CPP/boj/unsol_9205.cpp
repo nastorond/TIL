@@ -1,6 +1,7 @@
 // 맥주 마시면서 걸어가기
 #include <iostream>
 #include <vector>
+#include <queue>
 #define MAX_VAL 101
 
 using namespace std;
@@ -41,6 +42,15 @@ void dfs(int now_x, int now_y) {
                 visited[i] = false; 
             }
         }
+    }
+}
+
+void bfs(int x, int y) {
+    queue<pair<int, int>> q;
+    q.push(make_pair(x, y));
+
+    while (!q.empty()) {
+        
     }
 }
 
