@@ -1,2 +1,2 @@
 # TIL
-Today I Learned
+공부 노트
