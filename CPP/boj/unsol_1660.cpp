@@ -18,12 +18,16 @@ int main () {
     
     dp[0] = 0;
 
-    for (int i=1; i<=n*2; i++) {
-        dp[i] = cal(i) + dp[i-1];
-        // cout << "test " << dp[i] << endl;
-        if (dp[i] > n) {
-            res = i-1;
-            break;
+    while (n>0) {
+        for (int i=1; i<=n*2; i++) {
+            if (dp[i] == 0) {
+                dp[i] = cal(i) + dp[i-1];
+            }   
+            if (dp[i] > n) {
+                n -= dp[i-1];
+                res++;
+                break;
+            }
         }
     }
 
