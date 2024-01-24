@@ -1,0 +1,48 @@
+// boj 1707 이분 그래프
+#include <iostream>
+#include <vector>
+#define endl "\n"
+#define MAX_VERTEX 20001
+
+using namespace std;
+
+vector<int>* gp = new vector<int>[MAX_VERTEX];
+
+void solution(int v) {
+    // init
+    for (int i=0; i<v; i++) {
+        gp[i].clear();
+    }
+
+    for (int i=0; i<v; i++) {
+        cout << gp[i].size() << endl;
+        for (int j=0; j<gp[i].size(); j++) {
+            cout << gp[i][j] << endl;
+        }
+    }
+}
+
+void input() {
+    int vertex, e;
+    cin >> vertex >> e;
+
+    for (int i=0; i<e; i++) {
+        int u, v;
+        cin >> u >> v;
+        gp[u].push_back(v);
+        gp[v].push_back(u);
+    }
+    solution(vertex);
+}
+
+int main () {
+    ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+
+    int test_case;
+    cin >> test_case;
+    for (int tc=1; tc<=test_case; tc++) {
+        input();
+    }
+
+    return 0;
+}
