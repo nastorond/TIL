@@ -7,24 +7,26 @@
 using namespace std;
 
 vector<int>* gp = new vector<int>[MAX_VERTEX];
+char visited[MAX_VERTEX];
+int vertex, e;
 
-void solution(int v) {
-    // init
-    for (int i=0; i<v; i++) {
-        gp[i].clear();
-    }
-
-    for (int i=0; i<v; i++) {
-        cout << gp[i].size() << endl;
+void solution() {
+    for (int i=1; i<=vertex; i++) {
         for (int j=0; j<gp[i].size(); j++) {
-            cout << gp[i][j] << endl;
+            cout << gp[i][j] << " ";
         }
+        cout << endl;
     }
 }
 
 void input() {
-    int vertex, e;
     cin >> vertex >> e;
+    
+    // init
+    for (int i=1; i<=vertex; i++) {
+        gp[i].clear();
+        visited[i] = 0;
+    }
 
     for (int i=0; i<e; i++) {
         int u, v;
@@ -32,7 +34,6 @@ void input() {
         gp[u].push_back(v);
         gp[v].push_back(u);
     }
-    solution(vertex);
 }
 
 int main () {
@@ -42,7 +43,7 @@ int main () {
     cin >> test_case;
     for (int tc=1; tc<=test_case; tc++) {
         input();
+        solution();
     }
-
     return 0;
 }
