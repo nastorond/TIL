@@ -1,6 +1,7 @@
 // boj 1707 이분 그래프
 #include <iostream>
 #include <vector>
+#include <queue>
 #define endl "\n"
 #define MAX_VERTEX 20001
 
@@ -11,12 +12,8 @@ char visited[MAX_VERTEX];
 int vertex, e;
 
 void solution() {
-    for (int i=1; i<=vertex; i++) {
-        for (int j=0; j<gp[i].size(); j++) {
-            cout << gp[i][j] << " ";
-        }
-        cout << endl;
-    }
+    queue<int> q;
+    
 }
 
 void input() {
