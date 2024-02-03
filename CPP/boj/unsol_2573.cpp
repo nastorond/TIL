@@ -1,0 +1,11 @@
+#include <iostream>
+#define endl "\n"
+
+using namespace std;
+
+int main () {
+    iosbase::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+
+
+    return 0;
+}
