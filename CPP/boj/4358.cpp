@@ -1,7 +1,10 @@
-// 생태학 실버2
-// map 사용하는 문제
-// EoF 해결해야 하는 문제
-// 소수점 출력해야하는 문제
+/*
+* 생태학 실버2
+* map 사용하는 문제
+* EoF 해결해야 하는 문제
+* 소수점 출력해야하는 문제
+*/
+
 #include <iostream>
 #include <map>
 #include <string>
