@@ -68,3 +68,48 @@ C++에서 동적으로 메모리를 할당할 수 있는 유일한 방법이다.
 지금까지 포인터에 대한 기본적인 수준을 이해했으므로, 다음 포스트부터는 다양한 사용법을 살펴볼 예정이다.
 출처: https://boycoding.tistory.com/199 [소년코딩:티스토리]
 ```
+
+#### map
+- 각 노드가 key와 value 쌍으로 이루어진 트리.
+- 중복을 허용하지 않음
+- O(logn)인 레드블랙트리로 구성되어있음
+- key를 기준으로 오름차순으로 정렬
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+    map<string, int> m;
+    // 요소 삽입
+    m.insert({"Alice", 100});
+    m.insert({"Bob", 100});
+
+    // 요소 검색
+    if (m.find("Alice") != m.end()) {
+        cout << "find" << endl;
+    } else {
+        cout << "404" << endl;
+    }
+
+    // 탐색
+    for (auto iter = m.begin(); iter != m.end(); iter++) {
+        cout << iter->first << " " << iter->second << endl;
+    }
+
+    for (auto iter:m) {
+        cout << iter.first << " " << iter.second << endl;
+    }
+
+    // 전체 삭제
+    m.clear();
+
+    // 요소 삭제
+    // 처음부터 끝까지
+    m.erase(m.begin(), m.end());
+    // 특정 위치 요소 삭제 / 처음에서 두번째 요소 삭제
+    m.erase(m.begin()+2);
+    // key 값을 기준으로 삭제
+    m.erase("Alice")
+}
+```
