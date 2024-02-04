@@ -24,7 +24,14 @@ void graph_travel(int x, int y) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (0<=nx && nx<n && 0<=ny && ny<m && ocean[nx][ny] > 0 && visited[nx][ny] == cnt) {
-                ocean[nx][ny]--;
+                // 주변이 얼음일 경우 체크해야함
+                // 주변의 맞닿는 바다의 면적에 따라 얼음이 녹음 <-- 이거 체크 안해서 틀림
+                int numOcean = 0;
+                for (int j=0; j<4; j++) {
+                    numOcean += ocean[nx+dx[j]][ny+dy[j]] == 0 ? 1 : 0;
+                }
+                cout << numOcean << endl;
+                ocean[nx][ny]-= numOcean;
                 visited[nx][ny]++;
                 q.push(make_pair(nx, ny));
             }
@@ -71,20 +78,20 @@ int main () {
     solution();
 
     // check
-    cout << endl;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cout << ocean[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cout << visited[i][j] << " ";
-        }
-        cout << endl;
-    }
+    // cout << endl;
+    // for (int i=0; i<n; i++) {
+    //     for (int j=0; j<m; j++) {
+    //         cout << ocean[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+    // for (int i=0; i<n; i++) {
+    //     for (int j=0; j<m; j++) {
+    //         cout << visited[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
 
     cout << ans << endl;
 
