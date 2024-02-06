@@ -1,19 +1,22 @@
 // 2573 빙산
 #include <iostream>
 #include <queue>
+#include <tuple>
 #define endl "\n"
 #define MAX_VAL 303
 
 using namespace std;
 
-int ocean[MAX_VAL][MAX_VAL] = {};
+int ocean[MAX_VAL][MAX_VAL];
 int visited[MAX_VAL][MAX_VAL] = {};
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
 int n, m, cnt, ans;
 
 void graph_travel(int x, int y) {
+    int ck_cnt=0;
     queue<pair<int, int>> q;
+    queue<tuple<int, int, int>> ck_queue;
     q.push(make_pair(x, y));
     while (!q.empty()) {
         x = q.front().first;
@@ -30,11 +33,32 @@ void graph_travel(int x, int y) {
                 for (int j=0; j<4; j++) {
                     numOcean += ocean[nx+dx[j]][ny+dy[j]] == 0 ? 1 : 0;
                 }
-                cout << numOcean << endl;
-                ocean[nx][ny]-= numOcean;
+                // cout << numOcean << endl;
+                // ocean[nx][ny]-= numOcean;
+                ck_queue.push(make_tuple(nx, ny, numOcean));
                 visited[nx][ny]++;
                 q.push(make_pair(nx, ny));
+                ck_cnt++;
             }
+        }
+        for (int i=0; i<ck_cnt; i++) {
+
+            // cout << &ck_queue.front() << endl;
+            // cout << get<0>(&ck_queue.front()).name();
+
+            // int cx = get<0>(ck_queue.front());
+            // int cy = get<1>(ck_queue.front());
+            // int w = get<2>(ck_queue.front());
+
+            // int* ptr = &ocean[get<0>(ck_queue.front())][get<1>(ck_queue.front())];
+
+            // ptr -= w;
+
+            // cout << ptr << endl;
+            // cout << cx << " " << cy << " " << w;
+
+            // ocean[cx][cy] -= w;
+            // ck_queue.pop();
         }
     }
     return ;
