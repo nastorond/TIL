@@ -1,5 +1,7 @@
 # Queue
+
 ### 다 인자 큐애 넣어서 사용하는 법
+
 ```cpp
 #include <queue>
 typedef struct que{
@@ -14,7 +16,7 @@ int main(){
     s.x = a;
     s.y = b;
     s.z = c;
-    
+
     q.push(s);
     que e = q.front();
     q.pop();
@@ -22,9 +24,11 @@ int main(){
 ```
 
 # 자료형
+
 1e9 를 넘는 그런 거대한 수들은 long long 과 같은 자료형을 써야한다
 
-# &, *
+# &, \*
+
 ```cpp
 int cache[10][10] = {};
 
@@ -44,10 +48,12 @@ cout << "c" << " " << c << " size " << sizeof(c) << endl;
 cout << "d" << " " << d << " size " << sizeof(d) << endl;
 // d = 1
 ```
+
 - & 을 붙이면 값을 직접 가지고 있는 것이 아니라 값의 위치를 가지고 있는 것. 참조
 - \* 는 역참조. 위와 같은 관계로 값을 가지고 오고 불러올 수 있음.
 
 > What good are pointers?
+
 ```
 이 시점에서, 포인터는 약간 바보 같고, 학문적이거나, 둔하게 보일 수 있다. 일반 변수를 사용할 수 있는데 포인터를 사용하는 이유는 뭘까?
 포인터는 여러 가지 경우에서 유용하다.
@@ -70,10 +76,12 @@ C++에서 동적으로 메모리를 할당할 수 있는 유일한 방법이다.
 ```
 
 #### map
+
 - 각 노드가 key와 value 쌍으로 이루어진 트리.
 - 중복을 허용하지 않음
 - O(logn)인 레드블랙트리로 구성되어있음
 - key를 기준으로 오름차순으로 정렬
+
 ```cpp
 #include <iostream>
 #include <map>
@@ -112,4 +120,91 @@ int main() {
     // key 값을 기준으로 삭제
     m.erase("Alice")
 }
+```
+
+#### Tuple
+
+```cpp
+#include <tuple>
+
+int main() {
+    int s = get<0>(튜플)
+}
+```
+
+#### Trie
+
+- 문자열을 저장하고 효율적으로 탐색하기 위한 트리형태의 자료구조
+- 시간복잡도
+  - 제일 긴 문자열의 길이 L
+  - 총 문자열의 수 M
+  - 생성시 시간복잡도 O(M\*L)
+  - 탐색시 시간복잡도 O(L)
+- 구현
+
+```cpp
+#include <iostream>
+#include <string>
+#define ALPHABETS 26
+
+int char_to_index(char C) {
+    return c-'A';
+}
+
+struct Trie {
+    bool is_terminal; // represents end of string
+    Trie* children[ALPHABETS];
+
+    // Constructor
+    Trie(): is_terminal(false) {
+        memset(children, 0, sizeof(children));
+    }
+
+    // Delete all children
+    ~Trie() {
+        for(int i=0; i<ALPHABETS; i++) {
+            if (children[i]) {
+                delete children[i];
+            }
+        }
+    }
+
+    void insert(const char* key) {
+        if (*key == '\0') {
+            is_terminal = true;
+        }
+        else {
+            int inedx = char_to_index(*key);
+
+            if (children[index] == 0)
+                children[index] = new Trie();
+            children[index]->insert(key+1);
+        }
+    }
+
+    Trie* find(const char* key) {
+        if (*key == 0) {
+            return this;
+        }
+
+        int index = char_to_index(*key);
+        if (children[index] == 0) {
+            return NULL;
+        }
+
+        return children[index]->find(key+1);
+    }
+
+    bool string_exist(const char* key) {
+        if(*key == 0 && is_terminal) {
+            return true;
+        }
+
+        int index = char_to_index(*key);
+        if (children[index] == 0) {
+            return false;
+        }
+        return children[index]->string_exist(key+1);
+    }
+};
 ```
