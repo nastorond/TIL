@@ -23,6 +23,20 @@ int main(){
 }
 ```
 
+### vetor 나 arr 채우기
+```cpp
+#include <vector>
+#include <algorithm>
+
+int main() {
+    vector<int> v;
+    int arr[100] = {};
+
+    fill(v.begin(), v.begin() + 4, 0); // 4 4 4 4
+    fill(arr, arr + 4, 0); // 4 4 4 4 0 0 0 0 0 0 0 0...
+}
+```
+
 # 자료형
 
 1e9 를 넘는 그런 거대한 수들은 long long 과 같은 자료형을 써야한다
