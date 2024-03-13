@@ -1,3 +1,4 @@
+// Segment Tree 의 기본 활용
 #include <iostream>
 #include <vector>
 #include <math.h>
@@ -9,6 +10,9 @@ int n, m, k;
 
 long long arr[MAX_VAL];
 
+// in Parameter : node(fixed as 1), start(fixed as 0), end(fixed as n-1)
+// parameter : tree
+// n : arr's length
 long long init(vector<long long> &segTree, int node, int start, int end) {
     if (start == end) return segTree[node] = arr[start];
 
@@ -17,6 +21,7 @@ long long init(vector<long long> &segTree, int node, int start, int end) {
     return segTree[node] = init(segTree, node*2, start, mid) + init(segTree, node*2+1, mid+1, end);
 }
 
+// parameter : tree, node number(fixed as 1), left(start point for part sum), right(end point for part sum)
 long long sum(vector<long long> &segTree, int node, int left, int right, int start, int end) {
     if (left > end || right < start) return 0;
     if (left <= start && right >= end) return segTree[node];
@@ -26,6 +31,7 @@ long long sum(vector<long long> &segTree, int node, int left, int right, int sta
     return sum(segTree, node*2, left, right, start, mid) + sum(segTree, node*2+1, left, right, mid+1, end);
 }
 
+// parameter : tree, idx(index in arr), diff(new value - original value, type long long)
 void update(vector<long long> &segTree, int node, int start, int end, int idx, long long diff) {
     if (idx < start || idx > end) return ;
     segTree[node] += diff;
