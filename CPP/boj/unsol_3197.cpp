@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-#include <tuple>
+#include <vector>
 #define MAX_LEN 1501
 
 using namespace std;
@@ -9,34 +9,40 @@ int n, m, x, y;
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
 int map[MAX_LEN][MAX_LEN];
-int visited[MAX_LEN][MAX_LEN];
+bool visited[MAX_LEN][MAX_LEN];
+bool flg = false;
 
-int dijkstra() {
-    priority_queue<tuple<int, int, int>> pq;
-    pq.push(make_tuple(0, x, y));
-    visited[x][y] = 0;
-    while (!pq.empty()) {
-        x = get<1>(pq.top());
-        y = get<2>(pq.top());
-        int dist = -get<0>(pq.top());
-        pq.pop();
+queue<pair<int, int>> bfs(queue<pair<int, int>> &tmp) {
+    queue<pair<int, int>> res;
+
+    while (!tmp.empty()) {
+        x = tmp.front().first;
+        y = tmp.front().second;
+        tmp.pop();
+
         for (int i=0; i<4; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (0<=nx && nx<n && 0<=ny && ny<m) {
-                if (map[nx][ny] == 2) {
-                    return visited[x][y];
-                } else if (map[nx][ny] == 1 && dist + 1 < visited[nx][ny]) {
-                    visited[nx][ny] = dist + 1;
-                    pq.push(make_tuple(-(dist + 1), nx, ny));
-                } else {
-                    visited[nx][ny] = min(visited[x][y], visited[nx][ny]);
-                    pq.push(make_tuple(dist, nx, ny));
+
+            if (0<=nx && nx<n && 0<=ny && ny<m && !visited[nx][ny]) {
+                switch (map[nx][ny])
+                {
+                case 0:
+                    tmp.push(make_pair(nx, ny));
+                    visited[nx][ny] = true;
+                    break;
+                case 1:
+                    res.push(make_pair(nx, ny));
+                    visited[nx][ny] = true;
+                    break;
+                case 2:
+                    flg=true;
+                    return res;
                 }
             }
         }
     }
-    return 10;
+    return res;
 }
 
 int main() {
@@ -44,6 +50,7 @@ int main() {
     
     cin >> n >> m;
 
+    vector<pair<int, int>> start_point;
     string inp;
     char condition1 = '.';
     char condition2 = 'X';
@@ -61,28 +68,23 @@ int main() {
                 x = i;
                 y = cnt;
             }
-            visited[i][cnt] = 1e9;
+            visited[i][cnt] = false;
             cnt++;
         }
     }
-    
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cout << map[i][j] << " ";
-        }
-        cout << "\n";
+
+    int cnt=0;
+    queue<pair<int,int>> tmp;
+    visited[x][y] = true;
+    tmp.push(make_pair(x, y));
+
+    while(true) {
+        tmp = bfs(tmp);
+        if (!flg) cnt++;
+        else break;
     }
 
-    int res = dijkstra();
-
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cout << visited[i][j] << " ";
-        }
-        cout << "\n";
-    }
-
-    cout << res/2 + res%2 << "\n";
+    cout << cnt/2 + cnt%2 << "\n";
 
     return 0;
 }
