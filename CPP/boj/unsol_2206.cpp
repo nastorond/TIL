@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int n, m, maps[MAX_LEN][MAX_LEN], visited[MAX_LEN][MAX_LEN];
+int n, m, maps[MAX_LEN][MAX_LEN], visited[MAX_LEN][MAX_LEN][2];
 vector<pair<int, int>> walls;
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, -1, 0, 1};
@@ -14,7 +14,8 @@ int dy[] = {0, -1, 0, 1};
 void init() {
     for (int i=0; i<n; i++) {
         for (int j=0; j<m; j++) {
-            visited[i][j] = 0;
+            visited[i][j][0] = 0;
+            visited[i][j][1] = 0;
         }
     }
 }
@@ -24,21 +25,21 @@ int bfs() {
 
     queue<pair<int, int>> q;
     q.push(make_pair(0, 0));
-    visited[0][0] = 1;
+    visited[0][0][0] = 1;
     while (!q.empty()) {
         int x = q.front().first;
         int y = q.front().second;
         q.pop();
 
         if (x == n-1 && y == m-1) {
-            return visited[x][y];
+            return visited[x][y][0];
         }
         for (int i=0; i<4; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (0<=nx && nx<n && 0<=ny && ny<m) {
-                if (visited[nx][ny]==0 && maps[nx][ny] == 0) {
-                    visited[nx][ny] = visited[x][y] + 1;
+                if (visited[nx][ny][0]==0 && maps[nx][ny] == 0) {
+                    visited[nx][ny][0] = visited[x][y][0] + 1;
                     q.push(make_pair(nx, ny));
                 }
             }
