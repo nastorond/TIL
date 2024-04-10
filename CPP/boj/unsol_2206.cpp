@@ -64,8 +64,7 @@ int main () {
 
         for (char j:tmp) {
             maps[i][cnt] = j-'0';
-            // if(j=='1') walls.push_back(make_pair(i, cnt));
-            cnt++; 
+            cnt++;
         }
     }
 
