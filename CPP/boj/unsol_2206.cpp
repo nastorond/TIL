@@ -38,6 +38,7 @@ int bfs() {
             int ny = y + dy[i];
             if (0<=nx && nx<n && 0<=ny && ny<m && visited[nx][ny][0]==0) {
                 if (maps[nx][ny]==0) {
+                    if (visited[x][y][1] == 1) visited[nx][ny][1] = 1;
                     visited[nx][ny][0] = visited[x][y][0] + 1;
                     q.push(make_pair(nx, ny));
                 } else if (visited[x][y][1] == 0 && maps[nx][ny] == 1) {
@@ -45,7 +46,6 @@ int bfs() {
                     visited[nx][ny][1] = 1;
                     q.push(make_pair(nx, ny));
                 }
-                if (visited[x][y][1] == 1) visited[nx][ny][1] = 1;
             }
         }
     }
