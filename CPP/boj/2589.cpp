@@ -21,11 +21,8 @@ void bfs(int x, int y) {
     for (int i=0; i<L; i++) {
         for (int j=0; j<W; j++) {
             visited[i][j] = 1e9;
-            // cout << visited[i][j] << " ";
         }
-        // cout << endl;
     }
-    // memset(visited, 63, sizeof(visited)); // init to false 63 == max value in memset
     visited[x][y] = 0;
     
 
@@ -39,7 +36,6 @@ void bfs(int x, int y) {
         y = get<2>(pq.top());
         int distance = -get<0>(pq.top());
         pq.pop();
-        // cout << distance << " "; // check cur distance
 
         for (int i=0; i<4; i++) { // searching 4 dirs
             int nx = x + dx[i];
@@ -54,8 +50,6 @@ void bfs(int x, int y) {
             }
         }
     }
-
-    // cout << endl;
 
     res = max(record, res); // compare record & now res value
 }
