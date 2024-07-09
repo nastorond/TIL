@@ -12,14 +12,11 @@ int main() {
 
     vector<int> per(N.begin(), N.end());
 
-    // Next permutation을 찾기 위해 다음 순열 함수 사용
     if (next_permutation(per.begin(), per.end())) {
         for (char digit : per) {
             cout << digit;
         }
         cout << "\n";
-    } else {
-        cout << "No next permutation\n";
     }
 
     return 0;
