@@ -7,7 +7,7 @@ using namespace std;
 
 // 수풀의 수, 오솔길의 수
 int N, M, res=0;
-vector<vector<int>> fld;
+vector<vector<int>> fld(MAXN);
 int visited[MAXN];
 
 void dfs (int cur) {
@@ -32,7 +32,7 @@ void dfs (int cur) {
 
 bool isBinary() {
     for (int i=1; i<=N; i++) {
-        for (int j=1; j<=fld[i].size(); j++) {
+        for (int j=0; j<fld[i].size(); j++) {
             if (visited[i] == visited[fld[i][j]]) return false;
         }
     }
@@ -43,8 +43,6 @@ int main () {
     ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
     cin >> N >> M;
-    // N 의 크기에 맞춰서 vector길이 지정
-    fld.resize(N+1);
 
     // 수풀끼리 연결
     for (int i=0; i<M; i++) {
@@ -53,7 +51,7 @@ int main () {
         fld[u].push_back(v);
         fld[v].push_back(u);
     }
-    for (int i=1; i<N; i++) {
+    for (int i=1; i<=N; i++) {
         visited[i] = 0;
     }
 
