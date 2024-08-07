@@ -6,40 +6,34 @@
 using namespace std;
 
 // 수풀의 수, 오솔길의 수
-int N, M;
+int N, M, res=0;
 vector<vector<int>> fld;
-int visitedR[MAXN], visitedL[MAXN];
+int visited[MAXN];
 
-void init () {
-    for (int i=0; i<=N; i++) {
-        visitedR[i] = -1;
-        visitedL[i] = -1;
+void dfs (int cur) {
+    if (visited[cur] == 0) {
+        visited[cur] = 1;
+        res++;
+    }
+    for (int i=0; i<fld[cur].size(); i++) {
+        int next = fld[cur][i];
+        if (visited[next] == 0) {
+            if (visited[cur] == 1) {
+                visited[next] = 2;
+            }
+            else if (visited[cur] == 2) {
+                visited[next] = 1;
+                res++;
+            }
+            dfs(next);
+        }
     }
 }
 
-// rabbit location, loin location
-bool game (int rl, int ll) {
-    init();
-    queue<int> qR, qL;
-    visitedR[rl] = 1;
-    visitedL[ll] = 1;
-    qR.push(rl); qL.push(ll);
-
-    while (!qR.empty() && !qL.empty()) {
-        int tmpR = qR.front(), tmpL = qL.front();
-        qR.pop(); qL.pop();
-
-        for (int i=0; i<fld[rl].size(); i++) {
-            if (visitedR[fld[rl][i]] == -1 && visitedL[fld[rl][i]] != visitedR[tmpR]+1) {
-                qR.push(fld[rl][i]);
-                visitedR[fld[rl][i]] = visitedR[tmpR] + 1;
-            } else return false;
-        }
-        for (int i=0; i<fld[ll].size(); i++) {
-            if (visitedL[fld[ll][i]] == -1 && visitedL[fld[ll][i]] != visitedL[tmpL]+1) {
-                qL.push(fld[ll][i]);
-                visitedL[fld[ll][i]] = visitedL[tmpL] + 1;
-            } else return false;
+bool isBinary() {
+    for (int i=1; i<=N; i++) {
+        for (int j=1; j<=fld[i].size(); j++) {
+            if (visited[i] == visited[fld[i][j]]) return false;
         }
     }
     return true;
@@ -59,15 +53,16 @@ int main () {
         fld[u].push_back(v);
         fld[v].push_back(u);
     }
-
-    int res = 0;
-    for (int i=1; i<=N; i++) {
-        for (int j=1; j<=N; j++) {
-            res += (int) game(i, j);
-        }
+    for (int i=1; i<N; i++) {
+        visited[i] = 0;
     }
 
-    cout << res << "\n";
+    for (int i=1; i<=N; i++) {
+        if (visited[i] == 0) dfs(i);
+    }
+
+    if (isBinary()) cout << res * (N-res) * 2 << "\n";
+    else cout << 0 << "\n";
 
     return 0;
 }
