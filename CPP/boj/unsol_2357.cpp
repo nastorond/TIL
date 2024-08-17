@@ -1,3 +1,4 @@
+// 최솟값과 최댓값
 #include <iostream>
 #include <vector>
 #include <math.h>

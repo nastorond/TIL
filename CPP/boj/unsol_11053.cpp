@@ -1,3 +1,4 @@
+// 가장 긴 부분이 증가하는 수열
 #include <iostream>
 #define MAX_VAL 1002
 
