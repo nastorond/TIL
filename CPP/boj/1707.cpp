@@ -1,6 +1,7 @@
 // boj 1707 이분 그래프
 #include <iostream>
 #include <vector>
+#include <queue>
 #define endl "\n"
 #define MAX_VERTEX 20002
 
@@ -9,6 +10,33 @@ using namespace std;
 vector<vector<int>> gp(MAX_VERTEX);
 int visited[MAX_VERTEX];
 int vertex, e;
+
+/**
+ * other solution via bfs algorithm
+ * It gonnna be more easy to understand than dfs
+ * It's including isBinary or not
+ */
+bool bfs(int start) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = 1;
+
+    while (!q.empty()) {
+        int cur = q.front();
+        q.pop();
+
+        for (int i = 0; i < gp[cur].size(); i++) {
+            int next = gp[cur][i];
+            if (visited[next] == 0) {
+                visited[next] = 3 - visited[cur]; // 1 -> 2, 2 -> 1
+                q.push(next);
+            } else if (visited[next] == visited[cur]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 void dfs (int cur) {
     if (visited[cur] == 0) {
