@@ -4,8 +4,6 @@
 
 using namespace std;
 
-// 26179
-
 struct golem {
     int loc;
     int dir;
