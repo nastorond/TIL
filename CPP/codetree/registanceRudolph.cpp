@@ -43,50 +43,39 @@ void santaInteraction (int num, int x, int y, int dx, int dy) {
     santaInteraction(otherSanta, x, y, dx, dy);
 }
 
-int findSanta(int x, int y) {
-    tuple<int, int, int, int> res;
-    res = make_tuple(N*N, 10, 0, 0);
+int findSanta() {
+    // dist, r, c, dir
+    priority_queue<tuple<int, int, int>> pq;
+    int x = rudolph.first;
+    int y = rudolph.second;
+    int santaX, santaY;
+    pair<int, int> res = make_pair(N*N*N, 10);
 
-    cout << "\n";
-    
-    vector<int> tmpV;
+    for (auto p: santa) {
+        if (!p.second.isLive) continue;
+        santaX = p.second.x;
+        santaY = p.second.y;
+        pq.push(make_tuple(-manhattanDis(x, y, santaX, santaY), santaX, santaY));
+    }
+
+    santaX = get<1>(pq.top());
+    santaY = get<2>(pq.top());
+
     for (int i=0; i<8; i++) {
         int dx = x + rudolphMv[i][0];
         int dy = y + rudolphMv[i][1];
-        if (dx < 0 || dx >= N || dy < 0 || dy >= N) tmpV.push_back(0);
-        else tmpV.push_back(fld[dx][dy]);
-    }
-    for (int i : {4, 2, 6, 0, 3, 5, 1, 7}) {
-        if (tmpV[i] > 0) return i;
-    }
-
-    for (int i=0; i<8; i++) {
-        int dx = x + rudolphMv[i][0];
-        int dy = y + rudolphMv[i][1];
-        if (dx < 0 || dx >= N || dy < 0 || dy >= N) continue;
-
-        for (auto p : santa) {
-            if (!p.second.isLive) continue;
-            
-            int tmp = manhattanDis(dx, dy, p.second.x, p.second.y);
-            if (get<0>(res) >= tmp) {
-                if (get<0>(res) > tmp) {
-                    res = make_tuple(tmp, i, p.second.x, p.second.y);
-                }
-                else if (get<2>(res) < p.second.x) {
-                    res = make_tuple(tmp, i, p.second.x, p.second.y);
-                }
-                else if (get<2>(res) == p.second.x && get<3>(res) < p.second.y) {
-                    res = make_tuple(tmp, i, p.second.x, p.second.y);
-                }
-            }
+        if (dx < 0 || dx >= N || dy < 0 || dx >= N) continue;
+        int dist = manhattanDis(dx, dy, santaX, santaY);
+        if (dist < res.first) {
+            res = make_pair(dist, i);
         }
     }
-    return get<1>(res);
+
+    return res.second;
 }
 
 void rudolphMovingAndCollision() {
-    int dir = findSanta(rudolph.first, rudolph.second);
+    int dir = findSanta();
     int x = rudolph.first + rudolphMv[dir][0];
     int y = rudolph.second + rudolphMv[dir][1];
 
@@ -152,7 +141,7 @@ int findRudolph (int x, int y) {
 void simulation() {
     rudolphMovingAndCollision();
 
-    cout << "\n";
+    cout << "rudolph\n";
     for (auto v: fld) {
         for (int num : v) cout << num << " ";
         cout << "\n";
@@ -227,13 +216,6 @@ int main() {
         santa[num] = tmp;
         fld[tmp.x][tmp.y] = num;
     }
-
-    cout << "\n";
-    for (auto v : fld) {
-        for (int num : v) cout << num << " ";
-        cout << "\n";
-    }
-    cout << "\n";
 
     for (int i=0; i<M; i++) {
         simulation();
