@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <tuple>
+#include <algorithm>
 #define MAX_VAL 22
 
 using namespace std;
@@ -30,7 +32,7 @@ void InputFunc() {
             }
         }
     }
-    vi.resize(N, vector<int>(N, -1));
+    vi.resize(N, vector<int>(N, 0));
     candidates.clear();
 }
 
@@ -52,54 +54,48 @@ bool condition(int x, int y) {
 // moving
 bool findFishes() {
     int x = sharkX, y = sharkY;
-    bool flg = false;
-    priority_queue<tuple<int, int, int>> pq;
+    queue<pair<int, int>> q;
     
-    pq.push(make_tuple(-1, x, y));
-    vi[x][y] = 1;
+    q.push(make_pair(x, y));
+    vi[x][y] = 0;
     while(!q.empty()) {
-        int dist = -get<0>(pq.top());
-        x = get<1>(pq.top());
-        y = get<2>(pq.top()); pq.pop();
+        x = q.front().first;
+        y = q.front().second; q.pop();
         for (int i=0; i<4; i++) {
             int nx = x + mv[i][0];
             int ny = y + mv[i][1];
             if (condition(nx, ny) || vi[nx][ny] > 0) continue;
             if (fld[nx][ny] > sharkSize || fld[nx][ny] == 9) continue;
-
+            
             vi[nx][ny] = vi[x][y] + 1;
 
-            if (fld[nx][ny] <= sharkSize && fld[nx][ny] > 0) {
+            if (fld[nx][ny] < sharkSize && fld[nx][ny] > 0) {
                 candidates.push_back(make_pair(nx, ny));
-                flg = true;
             }
             q.push(make_pair(nx, ny));
         }
     }
 
-    return flg;
+    return !candidates.empty();
+}
+
+bool compare(pair<int, int> a, pair<int, int> b) {
+    if (vi[a.first][a.second] != vi[b.first][b.second]) return vi[a.first][a.second] < vi[b.first][b.second];
+    if (a.first != b.first) return a.first < b.first;
+    return a.second < b.second;
 }
 
 void movingShark () {
+    sort(candidates.begin(), candidates.end(), compare);
     pair<int, int> pii = candidates[0];
-    for (auto p : candidates) {
-        if (vi[pii.first][pii.second] < vi[p.first][p.second]) continue;
-        else if (vi[pii.first][pii.second] == vi[p.first][p.second]) {
-            if (pii.first > p.first || (pii.first == p.first && pii.second > p.second)) {
-                pii = p;
-            }
-        }
-        else if (vi[pii.first][pii.second] > vi[p.first][p.second]) {
-            pii = p;
-        }
-    }
+
     eatingCount++;
     sharkGrowing();
     fld[sharkX][sharkY] = 0;
     sharkX = pii.first;
     sharkY = pii.second;
     fld[pii.first][pii.second] = 9;
-    turn += vi[pii.first][pii.second] - 1;
+    turn += vi[pii.first][pii.second];
 
     return ;
 }
@@ -112,14 +108,24 @@ int main () {
     while(1) {
         if (!findFishes()) break;
         movingShark();
-        vi.assign(N, vector<int>(N, 0));
-        candidates.clear();
 
+        /*
+        cout << "\n";
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) cout << vi[i][j] << " ";
+            cout << "\n";
+        }
+        
         cout << "\n";
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) cout << fld[i][j] << " ";
             cout << "\n";
         }
+        */
+
+        vi.assign(N, vector<int>(N, 0));
+        candidates.clear();
+        
     }
 
     cout << turn << "\n";
