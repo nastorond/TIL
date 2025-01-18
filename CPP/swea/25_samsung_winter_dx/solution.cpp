@@ -123,7 +123,7 @@ void checkingTreasure (int x, int y)
 			tmpNum += fld[x + i][y + j];
 		}
 	}
-	countingFld[i][j] = tmpNum;
+	countingFld[i][j] = tmpNum;					// 보물 상자 개수 표기
 }
 
 void init(int N, int M, int Map[MAX_N][MAX_N])
@@ -156,6 +156,18 @@ Result findTreasureChest(int Pieces[MAX_M][MAX_M])
 
 	STPiecesMap stPiece;						// 조각지도 구조체 선언
 	stPiece.stInit(piecesMax);					// 구조체 초기화
+
+	for (int i=0; i<fieldMax; i++)
+	{
+		for (int j=0; j<fieldMax; j++)
+		{	
+			// 범위의 보물의 개수가 조각지도의 보물 개수보다 적으면 확인하지 않음
+			if (countingFld[i][j] < stPiece.treasureNum) continue;
+			/**
+			 * @todo 각 위치에 대해 검사를 하는 함수를 만들고 숫자쌍으로 return 해주는 함수 만들기, 불만족시 pair<-1, -1> return
+			 */
+		}
+	}
 
 	res.y = res.x = 0;
 	return res;
