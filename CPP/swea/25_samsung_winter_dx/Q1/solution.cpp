@@ -124,7 +124,7 @@ int iFieldMax;													// 전체 지도 중 탐색해야 할 사각형 한�
 int iPiecesMax;													// 조각 지도 한변의 길이
 
 /**
- * @brief 시작점을 기준으로 조각지도와 일치하는지 탐색합니다
+ * @brief 시작점을 기준으로 조각지도와 일치하는지 탐색합니다. 일치한다면 사용한 보물상자들을 지워줍니다.
  * @param x 시작 기준점 x
  * @param y 시작 기준점 y
  * @param iTreasureNum 해당 조각지도가 가지고 있는 보물의 개수
@@ -151,6 +151,14 @@ bool checkCanOpenTreasure(int x, int y, int iTreasureNum, vector<vector<int> >& 
 	if (iCnt == 0)
 	{
 		bRes = true;											// 보물상자가 원하는 만큼 있을 경우 true
+
+		for (int i=0; i<iPiecesMax; i++)
+		{
+			for (int j=0; j<iPiecesMax; j++)
+			{
+				fld[x + i][y + j] = 0;							// 한번 사용된 보물상자는 다시 사용하지 않으므로 없애줍니다.
+			}
+		}
 	}
 
 	return bRes;
@@ -192,7 +200,7 @@ pair<int, int> findFitPiece(int& x, int& y, STPiecesMap& stMap)
  * @param x 시작점의 x 좌표
  * @param y 시작점의 y 좌표
  */
-void checkingTreasure (int x, int y)
+void countingTreasure (int x, int y)
 {
 	int iTmpNum = 0;								// 보물 상자 카운팅 변수
 	for (int i=0; i<iPiecesMax; i++)
@@ -204,6 +212,20 @@ void checkingTreasure (int x, int y)
 	}
 	countingFld[x][y] = iTmpNum;					// 보물 상자 개수 표기
 	return;
+}
+
+/**
+ * @brief 보물상자의 개수 점검 함수
+ */
+void checkingTreasure()
+{
+	for (int i=0; i<iFieldMax; i++)
+	{
+		for (int j=0; j<iFieldMax; j++)
+		{
+			countingTreasure(i, j);					// 보물상자 카운팅 함수 호출
+		}
+	}
 }
 
 void init(int N, int M, int Map[MAX_N][MAX_N])
@@ -221,14 +243,6 @@ void init(int N, int M, int Map[MAX_N][MAX_N])
 			fld[i][j] = Map[i][j];					// 보물 위치 표기
 		}
 	}
-
-	for (int i=0; i<iFieldMax; i++)
-	{
-		for (int j=0; j<iFieldMax; j++)
-		{
-			checkingTreasure(i, j);					// 각 범위 당 보물상자 개수 카운팅
-		}
-	}
 }
 
 Result findTreasureChest(int Pieces[MAX_M][MAX_M])
@@ -236,6 +250,7 @@ Result findTreasureChest(int Pieces[MAX_M][MAX_M])
 	Result res;
 
 	STPiecesMap stPiece;							// 조각지도 구조체 선언
+	checkingTreasure();								// 범위 당 보물 위치 카운팅
 
 	stPiece.piece0.resize(iPiecesMax, vector<int>(iPiecesMax, 0));
 	for (int i=0; i<iPiecesMax; i++) 

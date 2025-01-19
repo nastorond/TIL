@@ -3,13 +3,11 @@
 #endif
 
 #include <stdio.h>
+#include "solution.cpp"
 
 #define MAX_N 1000
 #define MAX_M 20
 
-struct Result {
-	int y, x;
-};
 
 extern void init(int N, int M, int Map[MAX_N][MAX_N]);
 extern Result findTreasureChest(int Pieces[MAX_M][MAX_M]);
@@ -83,7 +81,7 @@ static int run(int Ans)
 int main()
 {
 	setbuf(stdout, NULL);
-	//freopen("sample_input.txt", "r", stdin);
+	freopen("sample_input.txt", "r", stdin);
 
 	int T, Ans;
 	scanf("%d %d", &T, &Ans);
