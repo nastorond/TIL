@@ -9,6 +9,7 @@ int main () {
     ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
     int n, dp[MAX_VAL], vals[MAX_VAL];
+    int res=-1e9;
 
     // input
     cin >> n;
@@ -17,9 +18,13 @@ int main () {
     }
 
     dp[0] = 0;
-    
+    for (int i=1; i<=n; i++)
+    {
+        dp[i] = max(dp[i-1] + vals[i], vals[i]);
+        res = max(res, dp[i]);
+    }
 
-    cout << dp[n] << endl;
+    cout << res << endl;
 
     return 0;
 }
