@@ -33,6 +33,16 @@ int main() {
     }
 
     // Please write your code here.
+    if (N < 2)
+    {
+        for (int i=0; i<M; i++)
+        {
+            cout << 0 << "\n";
+        }
+        
+        return 0;
+    }
+
     for (int i=0; i<N; i++)
     {
         for (int j=0; j<N; j++) fld[i][j] = 0;
