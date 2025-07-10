@@ -147,7 +147,11 @@ void spray_anits(int x, int y)
             dx = x + dia[i][0]*j;
             dy = y + dia[i][1]*j;
             if (boundaryCondition(dx, dy)) continue; //! out of bounds
-            if (fld[dx][dy] < 0) break; //! can't go anymore
+            if (fld[dx][dy] <= 0) //! can't go anymore
+            {
+                anti[dx][dy] = c + 1;
+                break;
+            }
 
             fld[dx][dy] = 0;
             anti[dx][dy] = c + 1;
