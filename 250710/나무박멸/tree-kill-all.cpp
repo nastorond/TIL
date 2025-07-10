@@ -220,12 +220,12 @@ int main() {
     while (m--)
     {
         grow_up_and_duplicated();
-        debug_print();
+        //debug_print();
 
         anti_weeds();
         turn_going();
 
-        debug_print();
+        //debug_print();
     }
 
     cout << ret << "\n";
