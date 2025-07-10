@@ -176,7 +176,7 @@ void anti_weeds()
                     dx = x + dia[i][0]*j;
                     dy = y + dia[i][1]*j;
                     if (boundaryCondition(dx, dy)) continue; //! out of bounds
-                    if (fld[dx][dy] < 0) break; //! can't go anymore
+                    if (fld[dx][dy] <= 0) break; //! can't go anymore
 
                     cnt += fld[dx][dy];
                 }
