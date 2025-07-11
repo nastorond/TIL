@@ -33,6 +33,11 @@ bool compare(Ball& a, Ball& b)
     return a.id > b.id;
 }
 
+bool boundaryCondition(int x, int y)
+{
+    return x < 0 || x >= 2000 || y < 0 || y >= 2000;
+}
+
 bool simulation()
 {
     bool ret = false;
@@ -69,7 +74,7 @@ bool simulation()
 
 int main() {
     cin >> T;
-
+    int ret = 0;
     for (int t = 0; t < T; t++) 
     {
         fld.resize(2000, vector<char>(2000, 0));
@@ -83,6 +88,7 @@ int main() {
             cin >> b.x >> b.y >> b.weight >> d;
             b.x += 1000;
             b.y += 1000;
+
             fld[b.x][b.y] = static_cast<char>(i);
             b.dir = get_dir(d);
             b.id = i;
@@ -90,10 +96,13 @@ int main() {
         }
 
         int max_turn = 2000; //! 양 끝 단 이 만나는 마지막 시간
+        ret = -1;
         for (int turn=1; turn <= max_turn; turn++)
         {
-            if (simulation())
+            if (!simulation()) continue;
+            ret = turn;
         }
+        cout << ret << "\n";
     }
 
     return 0;
