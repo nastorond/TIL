@@ -14,12 +14,12 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
-        ck[arr[i]]++;
+        ck[arr[i]-1]++;
     }
 
     for (int i = 0; i < m; i++) {
         cin >> nums[i];
-        cout << ck[nums[i]] << " ";
+        cout << ck[nums[i]-1] << " ";
     }
 
     // Please write your code here.
