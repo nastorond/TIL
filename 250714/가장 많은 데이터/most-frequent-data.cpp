@@ -15,8 +15,8 @@ int main() {
     }
 
     // Please write your code here.
-    int ret = 0;
-    string k;
+    int ret = 1;
+    string k; 
     for (int i=0; i<n; i++)
     {
         k = words[i];
