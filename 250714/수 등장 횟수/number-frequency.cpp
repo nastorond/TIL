@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAX_N = 100000;
+const int MAX_N = 100001;
 
 int n, m;
 int arr[MAX_N];
