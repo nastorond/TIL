@@ -37,7 +37,7 @@ int main() {
         if (x == n-1 && y == m-1) 
         {
             cout << vi[x][y] - 1 << "\n";
-            break;
+            return 0;
         }
 
         for (int i=0; i<4; i++)
@@ -51,6 +51,8 @@ int main() {
             vi[dx][dy] = vi[x][y] + 1;
         }
     }
+
+    cout << -1 << "\n";
 
     return 0;
 }
