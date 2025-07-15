@@ -27,6 +27,7 @@ int main() {
     int x, y, dx, dy;
 
     q.push(make_pair(0, 0));
+    vi[0][0] = 1;
 
     while(!q.empty())
     {
@@ -35,7 +36,7 @@ int main() {
         
         if (x == n-1 && y == m-1) 
         {
-            cout << vi[x][y] << "\n";
+            cout << vi[x][y] - 1 << "\n";
             break;
         }
 
