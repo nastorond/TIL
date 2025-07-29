@@ -16,7 +16,7 @@ void findingRoot(int cur)
 
     for (int chd : tree[cur])
     {
-        if (roots[chd] != 0) continue;
+        //if (roots[chd] != 0) continue;
         roots[chd] = cur;
         findingRoot(chd);
     }
