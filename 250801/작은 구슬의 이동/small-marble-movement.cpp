@@ -6,13 +6,10 @@ int n, t;
 int r, c;
 char d;
 
-// north, east, south, west
-int mv[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-
 pair<int, int> moving(char dir)
 {
-    if (dir == 'U') return make_pair(1, 0);
-    else if (dir == 'D') return make_pair(-1, 0);
+    if (dir == 'U') return make_pair(-1, 0);
+    else if (dir == 'D') return make_pair(1, 0);
     else if (dir == 'R') return make_pair(0, 1);
     else return make_pair(0, -1);
 }
