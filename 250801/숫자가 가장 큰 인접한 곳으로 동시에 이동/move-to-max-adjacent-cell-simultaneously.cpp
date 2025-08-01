@@ -45,7 +45,7 @@ void simul()
         {
             if (balls[i][j] == 1) moving_ball(i, j);
 
-            if (balls[i][j] > 1) balls[i][j] = 0;
+           // if (balls[i][j] > 1) balls[i][j] = 0;
         }
     }
 }
