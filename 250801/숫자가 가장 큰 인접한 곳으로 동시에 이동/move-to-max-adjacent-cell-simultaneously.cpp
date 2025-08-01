@@ -45,7 +45,18 @@ void simul()
         {
             if (balls[i][j] == 1) moving_ball(i, j);
 
-           // if (balls[i][j] > 1) balls[i][j] = 0;
+            if (balls[i][j] > 1) balls[i][j] = 0;
+        }
+    }
+}
+
+void remove_balls()
+{
+    for (int i=0; i<n; ++i)
+    {
+        for (int j=0; j<n; ++j)
+        {
+            if (balls[i][j] > 1) balls[i][j] = 0;
         }
     }
 }
@@ -85,6 +96,8 @@ int main()
         simul();
 
         swap(balls, copy_balls); // copy result
+
+        remove_balls();
     }
 
     int ret = 0;
@@ -92,7 +105,6 @@ int main()
     {
         for (int j=0; j<n; ++j)
         {
-            if (balls[i][j] > 1) continue;
             ret += balls[i][j];
         }
     }
