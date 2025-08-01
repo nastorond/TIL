@@ -8,7 +8,7 @@ vector<vector<int>> fld;
 vector<vector<int>> balls;
 vector<vector<int>> copy_balls;
 
-int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+int dir[4][2] = {{-1, 0}, {-1, 0}, {0, -1}, {0, 1}};
 
 bool boundary_condition(int x, int y)
 {
@@ -44,8 +44,6 @@ void simul()
         for (int j=0; j<n; ++j)
         {
             if (balls[i][j] == 1) moving_ball(i, j);
-
-            if (balls[i][j] > 1) balls[i][j] = 0;
         }
     }
 }
