@@ -27,7 +27,7 @@ char changedir(char dir)
 
 bool boundaryCondition(int x, int y)
 {
-    return x < 1 || x >= n || y < 1 || y >= n;
+    return x < 1 || x > n || y < 1 || y > n;
 }
 
 int main() {
