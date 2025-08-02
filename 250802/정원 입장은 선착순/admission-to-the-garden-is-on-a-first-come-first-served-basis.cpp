@@ -28,8 +28,9 @@ priority_queue<pii> ret;
 void solution()
 {
     auto tmp = pq.top(); pq.pop();
+    base_time = get<0>(tmp);
     base_time += get<1>(tmp);
-    base_time += get<0>(tmp);
+    // ret.push(make_pair(get<0>(tmp), get<2>(tmp)));
 
     while (!pq.empty())
     {
