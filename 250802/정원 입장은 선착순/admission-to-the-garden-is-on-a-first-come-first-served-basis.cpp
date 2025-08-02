@@ -1,70 +1,87 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include <tuple>
 #define pii pair<int, int>
-#define tiii tuple<int, int, int>
 
 using namespace std;
 
 int N;
 int base_time=0;
 
+struct info
+{
+    int number;
+    int ar_time;
+    int vw_time;
+};
+
 struct compare
 {
-    bool operator()(tiii a, tiii b)
+    bool operator()(info a, info b)
     {
-        if ((get<0>(a) < base_time && get<0>(b) < base_time) || get<0>(a) == get<0>(b))
+        if (a.ar_time == b.ar_time)
         {
-            return get<2>(a) > get<2>(b);
+            return a.number > b.number;
         }
-        return get<0>(a) > get<0>(b);
+        return a.ar_time > b.ar_time;
     }
 };
 
-priority_queue<tiii, vector<tiii>, compare> pq;
+struct compare2
+{
+    bool operator()(info a, info b)
+    {
+        return a.number > b.number;
+    }
+};
+
+priority_queue<info, vector<info>, compare> arrival_q;
+priority_queue<info, vector<info>, compare2> ready_q;
 priority_queue<pii> ret;
 
 void solution()
 {
-    auto tmp = pq.top(); pq.pop();
-    base_time = get<0>(tmp);
-    base_time += get<1>(tmp);
-    // ret.push(make_pair(get<0>(tmp), get<2>(tmp)));
+    auto tmp = arrival_q.top(); arrival_q.pop();
+    base_time = tmp.ar_time;
+    base_time += tmp.vw_time;
+    ret.push(make_pair(0, -1 * tmp.number));
 
-    while (!pq.empty())
+    while (true)
     {
-        // cout << get<0>(pq.top()) << " " << get<1>(pq.top()) << " " << get<2>(pq.top()) << "\n";
-        tmp = pq.top(); pq.pop();
-        while (!pq.empty())
+        while (!arrival_q.empty()) //! move person to ready queue
         {
-            auto tmp2 = pq.top();
-            if (get<0>(tmp2) < base_time && get<2>(tmp2) < get<2>(tmp))
-            {
-                pq.pop();
-                pq.push(tmp);
-                swap(tmp, tmp2);
-            }
-            else
-            {
-                break;
-            }
+            if (base_time < arrival_q.top().ar_time) break;
+
+            ready_q.push(arrival_q.top()); arrival_q.pop();
         }
 
         int delay_time = 0;
-        if (base_time < get<0>(tmp))
+        if (ready_q.empty())
         {
-            base_time = get<0>(tmp);
+            tmp = arrival_q.top();
+
+            base_time = tmp.ar_time;
         }
         else
         {
-            delay_time = base_time - get<0>(tmp);
+            tmp = ready_q.top(); ready_q.pop();
+
+            if (base_time < tmp.ar_time)
+            {
+                base_time = tmp.ar_time;
+                base_time += tmp.vw_time;
+            }
+            else
+            {
+                delay_time = base_time - tmp.ar_time;
+                base_time += tmp.vw_time;
+            }
+            ret.push(make_pair(delay_time, -1 * tmp.number));
         }
 
-        base_time += get<1>(tmp);
-        ret.push(make_pair(delay_time, get<2>(tmp)));
+        if (arrival_q.empty() && ready_q.empty()) break;
     }
-    
+
     cout << ret.top().first << "\n";
     /*
     while (!ret.empty())
@@ -75,17 +92,27 @@ void solution()
     */
 }
 
-int main() {
+int main() 
+{
     ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
     cin >> N;
 
-    int a, t;
+    info tmp;
     for (int i=0; i<N; ++i)
     {
-        cin >> a >> t;
-        pq.push(make_tuple(a, t, i+1));
+        cin >> tmp.ar_time >> tmp.vw_time;
+        tmp.number = i+1;
+        arrival_q.push(tmp);
     }
+
+    /*
+    while (!arrival_q.empty())
+    {
+        tmp = arrival_q.top(); arrival_q.pop();
+        cout << tmp.number << " " << tmp.ar_time << "\n";
+    }
+    */
 
     solution();
 
