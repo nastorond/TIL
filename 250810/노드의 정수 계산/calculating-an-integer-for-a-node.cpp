@@ -8,7 +8,7 @@ int n;
 vector<vector<pii>> tree;
 vector<int> dp;
 
-void dfs(int cur)
+int dfs(int cur)
 {
     if (dp[cur] != -1) return dp[cur];
 }
