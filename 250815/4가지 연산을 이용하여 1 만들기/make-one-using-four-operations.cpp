@@ -12,14 +12,13 @@ void dfs(int cur, int cnt)
         return ;
     }
 
-    if (cur < 0) return;
-    if (cnt > ret) return;
+    if (cur < 0 || cnt > ret) return;
 
+    if (cur%2 == 0) dfs(cur/2, cnt+1);
+    if (cur%3 == 0) dfs(cur/3, cnt+1);
     dfs(cur - 1, cnt+1);
     dfs(cur + 1, cnt+1);
     
-    if (cur%2 == 0) dfs(cur/2, cnt+1);
-    if (cur%3 == 0) dfs(cur/3, cnt+1);
 }
 
 int N;
@@ -30,7 +29,7 @@ int main() {
     // Please write your code here.
 
     dfs(N, 0);
-
+    
     cout << ret << "\n";
 
     return 0;
