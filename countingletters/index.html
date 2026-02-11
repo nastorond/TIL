@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자기소개서 문항별 관리</title>
+    <style>
+        :root { --primary-color: #007aff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; background-color: #f4f6f8; height: 100vh; display: flex; }
+        .main-container { display: flex; height: 100%; width: 100%; }
+        .sidebar { width: 280px; background-color: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; flex-shrink: 0; }
+        .tab-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #e0e0e0; }
+        .tab-header h3 { margin: 0; font-size: 16px; }
+        .sidebar-btn { width: 24px; height: 24px; border-radius: 50%; border: none; background-color: var(--primary-color); color: white; font-size: 18px; cursor: pointer; }
+        #tab-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
+        #tab-list li { padding: 15px; cursor: pointer; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        #tab-list li.active { background-color: #eef5ff; font-weight: bold; color: var(--primary-color); }
+        .delete-tab-btn { border: none; background: none; color: #aaa; cursor: pointer; font-size: 16px; visibility: hidden; }
+        #tab-list li:hover .delete-tab-btn { visibility: visible; }
+        .file-management { padding: 10px; border-top: 1px solid #e0e0e0; display: flex; gap: 10px; }
+        .file-management button { flex-grow: 1; padding: 8px; border: 1px solid var(--primary-color); background-color: #fff; color: var(--primary-color); border-radius: 4px; cursor: pointer; }
+        .file-management button:hover { background-color: #f0f7ff; }
+        .content-area { flex-grow: 1; padding: 20px; overflow-y: auto; }
+        .document-header { margin-bottom: 20px; }
+        #title-input { width: 100%; padding: 10px; font-size: 1.8em; font-weight: bold; border: none; border-bottom: 2px solid #eee; margin-bottom: 20px; box-sizing: border-box; }
+        #add-question-btn { width: 100%; padding: 12px; border: 1px dashed #ccc; background: #fafafa; border-radius: 8px; cursor: pointer; font-size: 16px; color: #555; margin-top: 10px; }
+        #add-question-btn:hover { background: #f0f0f0; }
+        .question-item { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .question-title-input { flex-grow: 1; border: none; font-size: 1.2em; font-weight: 600; padding: 5px 0; border-bottom: 1px solid transparent; }
+        .question-title-input:focus { outline: none; border-bottom: 1px solid var(--primary-color); }
+        .delete-question-btn { border: none; background: none; color: #aaa; cursor: pointer; font-size: 20px; }
+        .question-content-textarea { width: 100%; height: 200px; padding: 10px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px; resize: vertical; margin-bottom: 10px; }
+        .question-footer { display: flex; justify-content: flex-end; align-items: center; font-size: 1em; color: #555; }
+        .count-display { font-weight: bold; }
+        .max-length-input { width: 60px; text-align: center; border: 1px solid transparent; border-radius: 4px; margin-left: 5px; font-size: 1em; }
+        .max-length-input:hover { border-color: #ccc; }
+        .max-length-input:focus { border-color: var(--primary-color); outline: none; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="tab-header">
+                <h3>자기소개서 목록</h3>
+                <button id="add-tab-btn" class="sidebar-btn">+</button>
+            </div>
+            <ul id="tab-list"></ul>
+            <div class="file-management">
+                <button id="export-btn">파일로 저장</button>
+                <button id="import-btn">파일 불러오기</button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="document-header">
+                <input type="text" id="title-input" placeholder="자기소개서 제목 (예: 2025년 하반기 OO기업)">
+            </div>
+            <div id="question-list-container"></div>
+            <button id="add-question-btn">+ 문항 추가하기</button>
+            <div class="options" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;">
+                <strong>글자수 계산 옵션:</strong>
+                <label><input type="radio" name="count-type" value="char" checked> 글자 수</label>
+                <label><input type="radio" name="count-type" value="byte2"> 바이트(2b)</label>
+                <label><input type="radio" name="count-type" value="byte3"> 바이트(3b)</label>
+                <span style="margin: 0 10px;">|</span>
+                <label><input type="radio" name="space-option" value="include" checked> 공백 포함</label>
+                <label><input type="radio" name="space-option" value="exclude"> 공백 제외</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const titleInput = document.getElementById('title-input');
+        const tabList = document.getElementById('tab-list');
+        const questionListContainer = document.getElementById('question-list-container');
+        const addTabBtn = document.getElementById('add-tab-btn');
+        const addQuestionBtn = document.getElementById('add-question-btn');
+        const allOptions = document.querySelectorAll('input[type="radio"]');
+        const exportBtn = document.getElementById('export-btn');
+        const importBtn = document.getElementById('import-btn');
+        const importFileInput = document.getElementById('import-file-input');
+        
+        let docs = [];
+        let currentDocId = null;
+
+        const saveDocs = () => {
+            localStorage.setItem('docs', JSON.stringify(docs));
+            localStorage.setItem('currentDocId', currentDocId);
+        };
+
+        const loadDocs = () => {
+            const loadedDocs = JSON.parse(localStorage.getItem('docs'));
+            const loadedId = localStorage.getItem('currentDocId');
+            
+            if (loadedDocs && loadedDocs.length > 0) {
+                loadedDocs.forEach(doc => {
+                    if (doc.questions) {
+                        doc.questions.forEach(q => {
+                            if (q.maxLength === undefined) q.maxLength = 1000;
+                        });
+                    }
+                });
+                docs = loadedDocs;
+                currentDocId = loadedId && docs.find(d => d.id == loadedId) ? loadedId : docs[0].id;
+            } else {
+                const newQId = Date.now();
+                const newId = (newQId + 1).toString();
+                docs = [{ 
+                    id: newId, 
+                    title: "새 자기소개서", 
+                    questions: [{
+                        q_id: newQId.toString(),
+                        q_title: "1. 본인의 지원동기에 대해 서술하시오.",
+                        q_content: "",
+                        maxLength: 1000
+                    }]
+                }];
+                currentDocId = newId;
+            }
+            renderAll();
+        };
+
+        const renderTabs = () => {
+            tabList.innerHTML = '';
+            docs.forEach(doc => {
+                const li = document.createElement('li');
+                li.dataset.id = doc.id;
+                li.className = doc.id == currentDocId ? 'active' : '';
+                li.innerHTML = `<span>${doc.title || '제목 없음'}</span><button class="delete-tab-btn">×</button>`;
+                tabList.appendChild(li);
+            });
+        };
+
+        const renderContent = () => {
+            const currentDoc = docs.find(d => d.id == currentDocId);
+            if (!currentDoc) {
+                questionListContainer.innerHTML = '';
+                titleInput.value = '';
+                return;
+            };
+            titleInput.value = currentDoc.title;
+            questionListContainer.innerHTML = '';
+            currentDoc.questions.forEach(q => {
+                const questionItem = document.createElement('div');
+                questionItem.className = 'question-item';
+                questionItem.dataset.qId = q.q_id;
+                questionItem.innerHTML = `
+                    <div class="question-header">
+                        <input type="text" class="question-title-input" value="${q.q_title}" placeholder="문항 제목을 입력하세요">
+                        <button class="delete-question-btn">×</button>
+                    </div>
+                    <textarea class="question-content-textarea" placeholder="내용을 입력하세요...">${q.q_content}</textarea>
+                    <div class="question-footer">
+                        <span class="count-display">0</span>
+                        /
+                        <input type="number" class="max-length-input" value="${q.maxLength}">
+                    </div>
+                `;
+                questionListContainer.appendChild(questionItem);
+            });
+            updateAllCounters();
+        };
+
+        const renderAll = () => {
+            renderTabs();
+            renderContent();
+        };
+
+        const calculateLength = (text) => {
+            const spaceOption = document.querySelector('input[name="space-option"]:checked').value;
+            const countType = document.querySelector('input[name="count-type"]:checked').value;
+            if (spaceOption === 'exclude') text = text.replace(/\s/g, '');
+            if (countType === 'char') return text.length;
+            const bytePerKorean = (countType === 'byte2') ? 2 : 3;
+            let count = 0;
+            for (let i = 0; i < text.length; i++) {
+                count += (text.charCodeAt(i) <= 127) ? 1 : bytePerKorean;
+            }
+            return count;
+        };
+
+        const updateAllCounters = () => {
+            document.querySelectorAll('.question-item').forEach(item => {
+                const textarea = item.querySelector('.question-content-textarea');
+                const countDisplay = item.querySelector('.count-display');
+                const maxLengthInput = item.querySelector('.max-length-input');
+                const currentLength = calculateLength(textarea.value);
+                const maxLength = parseInt(maxLengthInput.value, 10) || 0;
+                countDisplay.textContent = currentLength;
+                countDisplay.style.color = (currentLength > maxLength) ? 'red' : 'inherit';
+            });
+        };
+        
+        titleInput.addEventListener('input', () => {
+            const currentDoc = docs.find(d => d.id == currentDocId);
+            if(currentDoc) {
+                currentDoc.title = titleInput.value;
+                const activeTab = tabList.querySelector(`li.active span`);
+                if (activeTab) activeTab.textContent = currentDoc.title || '제목 없음';
+                saveDocs();
+            }
+        });
+        
+        questionListContainer.addEventListener('input', (e) => {
+            const target = e.target;
+            const qItem = target.closest('.question-item');
+            if (!qItem) return;
+            const qId = qItem.dataset.qId;
+            const currentDoc = docs.find(d => d.id == currentDocId);
+            const question = currentDoc.questions.find(q => q.q_id == qId);
+            if (!question) return;
+            if (target.classList.contains('question-title-input')) {
+                question.q_title = target.value;
+            } else if (target.classList.contains('question-content-textarea')) {
+                question.q_content = target.value;
+            } else if (target.classList.contains('max-length-input')) {
+                question.maxLength = parseInt(target.value, 10) || 0;
+            }
+            updateAllCounters();
+            saveDocs();
+        });
+
+        questionListContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-question-btn')) {
+                const qItem = e.target.closest('.question-item');
+                const qId = qItem.dataset.qId;
+                const currentDoc = docs.find(d => d.id == currentDocId);
+                if (currentDoc.questions.length <= 1) { alert('최소 1개의 문항은 남겨두어야 합니다.'); return; }
+                currentDoc.questions = currentDoc.questions.filter(q => q.q_id != qId);
+                renderContent();
+                saveDocs();
+            }
+        });
+        
+        addQuestionBtn.addEventListener('click', () => {
+            const currentDoc = docs.find(d => d.id == currentDocId);
+            if (currentDoc) {
+                currentDoc.questions.push({ q_id: Date.now().toString(), q_title: `${currentDoc.questions.length + 1}. 새 문항`, q_content: '', maxLength: 1000 });
+                renderContent();
+                saveDocs();
+            }
+        });
+
+        allOptions.forEach(option => option.addEventListener('change', updateAllCounters));
+        
+        addTabBtn.addEventListener('click', () => {
+            const newQId = Date.now();
+            const newId = (newQId + 1).toString();
+            docs.push({ id: newId, title: "새 자기소개서", questions: [{ q_id: newQId.toString(), q_title: "1. 새 문항", q_content: "", maxLength: 1000}] });
+            currentDocId = newId;
+            renderAll();
+            saveDocs();
+        });
+
+        tabList.addEventListener('click', (e) => {
+            const targetLi = e.target.closest('li');
+            if (!targetLi) return;
+            if (e.target.classList.contains('delete-tab-btn')) {
+                if (docs.length <= 1) { alert("최소 1개의 자기소개서는 남겨두어야 합니다."); return; }
+                const docIdToDelete = targetLi.dataset.id;
+                docs = docs.filter(d => d.id !== docIdToDelete);
+                if (currentDocId === docIdToDelete) { currentDocId = docs[0]?.id || null; }
+            } else { currentDocId = targetLi.dataset.id; }
+            renderAll();
+            saveDocs();
+        });
+
+        exportBtn.addEventListener('click', () => {
+            const dataStr = JSON.stringify(docs, null, 2);
+            const blob = new Blob([dataStr], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `자기소개서_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            a.remove();
+        });
+
+        importBtn.addEventListener('click', () => importFileInput.click());
+        importFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        localStorage.setItem('docs', JSON.stringify(importedData));
+                        const firstDoc = importedData[0];
+                        localStorage.setItem('currentDocId', firstDoc ? firstDoc.id : null);
+                        loadDocs();
+                        alert('성공적으로 불러왔습니다!');
+                    } else { throw new Error('유효하지 않은 파일 형식입니다.'); }
+                } catch (error) { alert('파일을 불러오는 데 실패했습니다: ' + error.message); }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        });
+
+        // ▼▼▼ keydown 리스너를 아래 코드로 교체하거나 새로 추가해주세요 ▼▼▼
+        document.addEventListener('keydown', (event) => {
+            // Cmd+S 또는 Ctrl+S를 감지하면
+            if ((event.metaKey || event.ctrlKey) && event.key === 's') {
+                // 브라우저의 기본 동작(저장 팝업)만 막고 아무것도 하지 않습니다.
+                event.preventDefault();
+            }
+        });
+
+        loadDocs();
+    });
+    </script>
+</body>
+</html>
